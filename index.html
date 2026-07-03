@@ -384,6 +384,7 @@ function toggleLang(){
   document.documentElement.setAttribute('lang', sv ? 'sv' : 'ar');
   document.getElementById('langbtn').textContent = sv ? 'عربي' : 'Svenska';
 }
+if(location.search.indexOf('sv')>-1||location.hash==='#sv')toggleLang();
 // booking demo
 var svc=null, slot=null;
 document.querySelectorAll('#svc .chip').forEach(function(b){
