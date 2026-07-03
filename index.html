@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Knallelands Bilcenter × Ikapp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14181f; --muted:#5b6472; --line:#e7e3dc; --bg:#faf9f7; --card:#ffffff;
+    --accent:#1f6f8b; --accent-dark:#144e63; --gold:#b7883b; --good:#1f8b5f;
+    --sms:#e9f4ee;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);
+    font-family:"IBM Plex Sans Arabic",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:22px 18px 60px}
+  header{border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:6px;
+    display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .brand{font-weight:700;letter-spacing:.02em;font-size:13px;text-transform:uppercase}
+  .brand span{color:var(--accent)}
+  .langbtn{border:1px solid var(--line);background:var(--card);border-radius:20px;
+    padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink);
+    font-family:inherit}
+  h1{font-size:clamp(25px,6vw,38px);line-height:1.2;margin:18px 0 6px;letter-spacing:-.01em}
+  .lead{color:var(--muted);font-size:clamp(15px,2.6vw,17px);max-width:56ch;margin:0}
+  .sechead{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--accent);
+    margin:46px 0 2px;font-weight:700}
+  .sechead .num{color:var(--gold)}
+  h2{font-size:clamp(20px,3.6vw,25px);margin:2px 0 4px;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:14.5px;margin:0 0 16px}
+  .demo{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:18px;box-shadow:0 1px 0 rgba(20,24,31,.02)}
+  .dtag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--muted);border:1px solid var(--line);
+    border-radius:20px;padding:2px 9px;margin-bottom:12px}
+  /* booking form */
+  .f label{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin:12px 0 5px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:9px 13px;
+    font-size:14px;cursor:pointer;font-family:inherit;color:var(--ink);transition:all .12s}
+  .chip.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  .f input{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;
+    font-size:16px;font-family:inherit;background:var(--bg);color:var(--ink)}
+  .f input:focus{outline:2px solid var(--accent);outline-offset:-1px}
+  .regnr{letter-spacing:.18em;font-weight:700;text-transform:uppercase;text-align:center}
+  .slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .slot{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:9px 4px;
+    font-size:13px;cursor:pointer;font-family:inherit;text-align:center;color:var(--ink)}
+  .slot.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  .go{width:100%;margin-top:16px;border:0;background:var(--accent);color:#fff;font-weight:700;
+    font-size:15.5px;padding:13px;border-radius:11px;cursor:pointer;font-family:inherit;
+    transition:background .12s}
+  .go:hover{background:var(--accent-dark)}
+  .go:disabled{opacity:.45;cursor:not-allowed}
+  /* sms bubble */
+  .phone{background:#f4f2ee;border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:14px}
+  .phone .from{font-size:11px;color:var(--muted);font-weight:600;margin-bottom:6px}
+  .bubble{background:var(--sms);border:1px solid #cfe6d9;border-radius:12px;padding:11px 13px;
+    font-size:14px;max-width:92%;opacity:0;transform:translateY(8px);
+    transition:opacity .5s,transform .5s;white-space:pre-line}
+  .bubble.show{opacity:1;transform:none}
+  .bubble b{color:var(--good)}
+  .hint{font-size:12.5px;color:var(--muted);margin-top:10px}
+  .hidden{display:none !important}
+  /* review card */
+  .gcard{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:14px;background:#fff;direction:ltr;text-align:left}
+  .gcard .gname{font-weight:700;font-size:14.5px}
+  .stars{color:#f5a623;font-size:17px;letter-spacing:2px}
+  .gmeta{font-size:12.5px;color:var(--muted)}
+  .newrev{border-top:1px dashed var(--line);margin-top:10px;padding-top:10px;
+    opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s}
+  .newrev.show{opacity:1;transform:none}
+  .newrev .who{font-size:13px;font-weight:600}
+  .newrev .txt{font-size:13px;color:var(--muted)}
+  /* before/after */
+  .ba{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);
+    margin-top:14px;touch-action:none;user-select:none;direction:ltr}
+  .ba svg{display:block;width:100%;height:auto}
+  .ba .after{position:absolute;inset:0;clip-path:inset(0 0 0 50%)}
+  .ba .bar{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;
+    box-shadow:0 0 8px rgba(0,0,0,.4);transform:translateX(-1.5px)}
+  .ba .knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:38px;height:38px;border-radius:50%;background:#fff;display:flex;align-items:center;
+    justify-content:center;font-weight:700;color:var(--ink);box-shadow:0 2px 10px rgba(0,0,0,.3);
+    font-size:15px}
+  .balabel{position:absolute;top:10px;font-size:11px;font-weight:700;letter-spacing:.05em;
+    padding:3px 9px;border-radius:14px;color:#fff;background:rgba(20,24,31,.65)}
+  .balabel.l{left:10px}.balabel.r{right:10px}
+  /* plans */
+  .plans{display:grid;grid-template-columns:1fr;gap:14px;margin-top:16px}
+  @media(min-width:700px){.plans{grid-template-columns:repeat(3,1fr)}}
+  .plan{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;
+    display:flex;flex-direction:column}
+  .plan.feat{border:2px solid var(--accent);box-shadow:0 10px 30px rgba(31,111,139,.12)}
+  .plan .ribbon{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.06em;
+    color:#fff;background:var(--accent);border-radius:20px;padding:3px 10px;margin-bottom:10px}
+  .plan .name{font-weight:700;font-size:17px}
+  .plan .tagline{color:var(--muted);font-size:13.5px;margin:4px 0 14px}
+  .price{border-top:1px solid var(--line);padding-top:12px;margin-bottom:12px}
+  .price .row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+  .price .k{font-size:12px;color:var(--muted)}
+  .price .v{font-size:18px;font-weight:700}
+  .price .v small{font-size:11.5px;font-weight:500;color:var(--muted)}
+  ul.feats{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+  ul.feats li{font-size:13.5px;padding-inline-start:22px;position:relative}
+  ul.feats li::before{content:"✓";position:absolute;inset-inline-start:0;top:0;
+    color:var(--good);font-weight:700}
+  .roi{background:#f2efe9;border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+    font-size:14.5px;margin-top:16px}
+  .roi b{color:var(--accent-dark)}
+  .fine{color:var(--muted);font-size:12px;margin-top:10px}
+  /* cta */
+  .cta{background:var(--ink);color:#fff;border-radius:18px;padding:26px 22px;margin-top:50px;text-align:center}
+  .cta h2{color:#fff;margin:0 0 6px}
+  .cta p{color:#c9cdd4;font-size:14.5px;margin:0;max-width:44ch;margin-inline:auto}
+  footer{margin-top:44px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);
+    font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer b{color:var(--ink)}
+  /* lang switching */
+  body.sv .ar{display:none}
+  body:not(.sv) .svt{display:none}
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="brand">KNALLELANDS BILCENTER <span>×</span> IKAPP</div>
+  <button class="langbtn" id="langbtn" onclick="toggleLang()">Svenska</button>
+</header>
+
+<h1>
+  <span class="ar">هذا ليس عرض شرائح. هذا النظام نفسه، جرّبه بيدك.</span>
+  <span class="svt">Det här är ingen presentation. Det är själva systemet, testa det själv.</span>
+</h1>
+<p class="lead">
+  <span class="ar">ثلاث تجارب حيّة: الحجز بدون تلفون، تقييمات Google تتحسن لوحدها، وصور سيارات بمستوى معرض. كل شيء تحت يعمل الآن، اضغط وجرّب.</span>
+  <span class="svt">Tre saker som fungerar live: bokning utan telefonsamtal, Google-omdömen som växer av sig själva, och bilbilder i showroom-klass. Allt nedan fungerar nu, tryck och testa.</span>
+</p>
+
+<!-- ============ 1. BOOKING ============ -->
+<div class="sechead reveal"><span class="num">01</span> <span class="ar">الحجز</span><span class="svt">Bokning</span></div>
+<h2 class="reveal">
+  <span class="ar">الزبون يحجز بنفسه. أنت لا ترد على التلفون.</span>
+  <span class="svt">Kunden bokar själv. Du slipper telefonen.</span>
+</h2>
+<p class="sub reveal">
+  <span class="ar">الزبون يدخل رقم اللوحة ويختار الخدمة والوقت. أنت تستلم رسالة جاهزة فيها كل التفاصيل. جرّب:</span>
+  <span class="svt">Kunden fyller i regnummer, väljer tjänst och tid. Du får ett SMS med alla detaljer. Testa:</span>
+</p>
+
+<div class="demo reveal">
+  <span class="dtag"><span class="ar">تجربة حيّة</span><span class="svt">Live demo</span></span>
+  <div class="f">
+    <label><span class="ar">ماذا تحتاج؟</span><span class="svt">Vad behöver du?</span></label>
+    <div class="chips" id="svc">
+      <button class="chip" data-v="Däckbyte"><span class="ar">تغيير إطارات</span><span class="svt">Däckbyte</span></button>
+      <button class="chip" data-v="Service"><span class="ar">سيرفيس</span><span class="svt">Service</span></button>
+      <button class="chip" data-v="Reparation"><span class="ar">تصليح</span><span class="svt">Reparation</span></button>
+      <button class="chip" data-v="Diagnos"><span class="ar">فحص كمبيوتر</span><span class="svt">Diagnos</span></button>
+    </div>
+    <label><span class="ar">رقم اللوحة</span><span class="svt">Registreringsnummer</span></label>
+    <input class="regnr" id="reg" maxlength="7" placeholder="ABC 123" autocomplete="off">
+    <label><span class="ar">اختر وقت</span><span class="svt">Välj tid</span></label>
+    <div class="slots" id="slots">
+      <button class="slot" data-v="Mån 08:30">Mån 08:30</button>
+      <button class="slot" data-v="Mån 13:00">Mån 13:00</button>
+      <button class="slot" data-v="Tis 09:00">Tis 09:00</button>
+      <button class="slot" data-v="Tis 15:30">Tis 15:30</button>
+      <button class="slot" data-v="Ons 08:30">Ons 08:30</button>
+      <button class="slot" data-v="Ons 11:00">Ons 11:00</button>
+    </div>
+    <button class="go" id="bookbtn" onclick="book()" disabled>
+      <span class="ar">احجز الآن</span><span class="svt">Boka nu</span>
+    </button>
+  </div>
+  <div class="phone hidden" id="smsbox">
+    <div class="from"><span class="ar">الرسالة التي تصلك أنت:</span><span class="svt">SMS:et som kommer till dig:</span></div>
+    <div class="bubble" id="smsbubble"></div>
+    <div class="hint">
+      <span class="ar">الزبون أيضاً يستلم تأكيد تلقائي برقم لوحته ووقته.</span>
+      <span class="svt">Kunden får samtidigt en automatisk bekräftelse med regnr och tid.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 2. REVIEWS ============ -->
+<div class="sechead reveal"><span class="num">02</span> <span class="ar">التقييمات</span><span class="svt">Omdömen</span></div>
+<h2 class="reveal">
+  <span class="ar">بعد كل شغلة، رسالة تلقائية. التقييمات تكبر لوحدها.</span>
+  <span class="svt">Efter varje jobb, ett automatiskt SMS. Omdömena växer av sig själva.</span>
+</h2>
+<p class="sub reveal">
+  <span class="ar">عندما تنتهي من سيارة، النظام يرسل للزبون رسالة لطيفة مع رابط التقييم. الزبون الراضي يضغط ويقيّم. هكذا يعمل:</span>
+  <span class="svt">När en bil är klar skickar systemet ett vänligt SMS med omdömeslänken. Nöjda kunder trycker och betygsätter. Så här funkar det:</span>
+</p>
+
+<div class="demo reveal">
+  <span class="dtag"><span class="ar">محاكاة</span><span class="svt">Simulering</span></span>
+  <button class="go" id="revbtn" onclick="review()">
+    <span class="ar">السيارة جاهزة، سلّمناها للزبون ←</span><span class="svt">Bilen är klar, kunden hämtar →</span>
+  </button>
+  <div class="phone hidden" id="revsms">
+    <div class="from"><span class="ar">الرسالة التي تصل الزبون:</span><span class="svt">SMS:et kunden får:</span></div>
+    <div class="bubble" id="revbubble"></div>
+  </div>
+  <div class="gcard hidden" id="gcard">
+    <div class="gname">Knallelands Bilcenter</div>
+    <div><span class="stars" id="gstars">★★★★☆</span> <span class="gmeta" id="gmeta">4,0 · 32 recensioner</span></div>
+    <div class="newrev" id="newrev">
+      <div class="who">Elin S. <span class="stars" style="font-size:13px">★★★★★</span></div>
+      <div class="txt">Snabb service och schysst pris. Fick SMS när bilen var klar. Rekommenderas!</div>
+    </div>
+  </div>
+  <div class="hint hidden" id="revhint">
+    <span class="ar">كل أسبوع بدون هذا النظام = تقييمات ضائعة. المشتري يقارن النجوم قبل ما يتصل.</span>
+    <span class="svt">Varje vecka utan detta = förlorade omdömen. Köpare jämför stjärnor innan de ringer.</span>
+  </div>
+</div>
+
+<!-- ============ 3. AI PHOTOS ============ -->
+<div class="sechead reveal"><span class="num">03</span> <span class="ar">صور السيارات</span><span class="svt">Bilbilder</span></div>
+<h2 class="reveal">
+  <span class="ar">نفس السيارة. صورة بمستوى معرض.</span>
+  <span class="svt">Samma bil. Bild i showroom-klass.</span>
+</h2>
+<p class="sub reveal">
+  <span class="ar">تصوّر السيارة بموبايلك في الساحة، ونحن نحولها بالذكاء الاصطناعي إلى صورة استوديو. اسحب الخط:</span>
+  <span class="svt">Du fotar bilen med mobilen på gården, vi gör om den med AI till en studiobild. Dra i linjen:</span>
+</p>
+
+<div class="ba reveal" id="ba">
+  <!-- BEFORE: gritty parking lot -->
+  <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg">
+    <rect width="700" height="420" fill="#b9b6ae"/>
+    <rect y="250" width="700" height="170" fill="#8f8c85"/>
+    <line x1="60" y1="380" x2="180" y2="380" stroke="#d8d5cc" stroke-width="6"/>
+    <line x1="300" y1="395" x2="430" y2="395" stroke="#d8d5cc" stroke-width="6"/>
+    <line x1="540" y1="380" x2="660" y2="380" stroke="#d8d5cc" stroke-width="6"/>
+    <rect x="0" y="120" width="700" height="10" fill="#a3a099"/>
+    <g opacity=".55"><rect x="20" y="60" width="90" height="190" fill="#7d7a74"/><rect x="590" y="70" width="90" height="180" fill="#7d7a74"/></g>
+    <ellipse cx="350" cy="330" rx="230" ry="22" fill="#000" opacity=".28"/>
+    <g id="car1">
+      <path d="M140 300 q4 -50 60 -62 q40 -46 120 -50 q95 -5 150 42 q14 12 22 14 q70 10 78 42 q6 22 -8 26 l-30 4 q-10 -34 -46 -34 q-36 0 -44 34 l-190 0 q-10 -34 -46 -34 q-36 0 -44 34 l-16 -2 q-10 -4 -6 -14 z" fill="#6e7d8a"/>
+      <path d="M230 244 q36 -40 106 -44 l6 44 z" fill="#9fb2c0" opacity=".85"/>
+      <path d="M356 200 q80 -2 128 40 l-124 4 z" fill="#9fb2c0" opacity=".85"/>
+      <circle cx="216" cy="304" r="30" fill="#2c313a"/><circle cx="216" cy="304" r="13" fill="#555c66"/>
+      <circle cx="496" cy="304" r="30" fill="#2c313a"/><circle cx="496" cy="304" r="13" fill="#555c66"/>
+    </g>
+    <text x="350" y="35" font-family="Arial" font-size="15" fill="#5c5952" text-anchor="middle" opacity=".8">foto: mobilkamera, parkering</text>
+  </svg>
+  <div class="after">
+    <!-- AFTER: studio -->
+    <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="spot" cx="50%" cy="30%" r="75%">
+          <stop offset="0%" stop-color="#3a4450"/><stop offset="100%" stop-color="#12161c"/>
+        </radialGradient>
+        <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#232a33"/><stop offset="100%" stop-color="#0c0f13"/>
+        </linearGradient>
+        <linearGradient id="paint" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3d8ab0"/><stop offset="55%" stop-color="#1f6f8b"/><stop offset="100%" stop-color="#144e63"/>
+        </linearGradient>
+      </defs>
+      <rect width="700" height="420" fill="url(#spot)"/>
+      <rect y="250" width="700" height="170" fill="url(#floor)"/>
+      <ellipse cx="350" cy="332" rx="250" ry="26" fill="#000" opacity=".55"/>
+      <g>
+        <path d="M140 300 q4 -50 60 -62 q40 -46 120 -50 q95 -5 150 42 q14 12 22 14 q70 10 78 42 q6 22 -8 26 l-30 4 q-10 -34 -46 -34 q-36 0 -44 34 l-190 0 q-10 -34 -46 -34 q-36 0 -44 34 l-16 -2 q-10 -4 -6 -14 z" fill="url(#paint)"/>
+        <path d="M150 288 q60 -18 200 -20 q140 -2 210 16" stroke="#bfe3f2" stroke-width="3" fill="none" opacity=".5"/>
+        <path d="M230 244 q36 -40 106 -44 l6 44 z" fill="#cfe9f5" opacity=".9"/>
+        <path d="M356 200 q80 -2 128 40 l-124 4 z" fill="#cfe9f5" opacity=".9"/>
+        <circle cx="216" cy="304" r="30" fill="#14181f"/><circle cx="216" cy="304" r="13" fill="#8b95a3"/><circle cx="216" cy="304" r="5" fill="#d7dde6"/>
+        <circle cx="496" cy="304" r="30" fill="#14181f"/><circle cx="496" cy="304" r="13" fill="#8b95a3"/><circle cx="496" cy="304" r="5" fill="#d7dde6"/>
+        <g opacity=".35" transform="translate(0,660) scale(1,-1)">
+          <path d="M140 300 q4 -50 60 -62 q40 -46 120 -50 q95 -5 150 42 q14 12 22 14 q70 10 78 42 q6 22 -8 26 l-30 4 q-10 -34 -46 -34 q-36 0 -44 34 l-190 0 q-10 -34 -46 -34 q-36 0 -44 34 l-16 -2 q-10 -4 -6 -14 z" fill="#1f6f8b"/>
+        </g>
+      </g>
+      <text x="350" y="35" font-family="Arial" font-size="15" fill="#9fb2c0" text-anchor="middle" opacity=".9">samma foto, AI-förbättrad</text>
+    </svg>
+  </div>
+  <div class="bar" id="babar"></div>
+  <div class="knob" id="baknob">⇄</div>
+  <div class="balabel l"><span class="ar">قبل</span><span class="svt">Före</span></div>
+  <div class="balabel r"><span class="ar">بعد</span><span class="svt">Efter</span></div>
+</div>
+<p class="hint reveal">
+  <span class="ar">هذا رسم توضيحي للفكرة. مع سياراتك الحقيقية النتيجة أقوى بكثير، نجرب على سيارة من ساحتك في أول أسبوع.</span>
+  <span class="svt">Detta är en illustration av konceptet. Med dina riktiga bilar blir resultatet mycket starkare, vi testar på en bil från din gård första veckan.</span>
+</p>
+
+<!-- ============ 4. PACKAGES ============ -->
+<div class="sechead reveal"><span class="num">04</span> <span class="ar">الباقات</span><span class="svt">Paketen</span></div>
+<h2 class="reveal">
+  <span class="ar">ثلاث باقات. كلها تبدأ بالبناء مرة واحدة، ثم شهري.</span>
+  <span class="svt">Tre paket. Alla börjar med ett engångsbygge, sedan månadsvis.</span>
+</h2>
+
+<div class="plans reveal">
+  <div class="plan">
+    <div class="name">🥉 <span class="ar">الأساس</span><span class="svt">Grund</span></div>
+    <div class="tagline"><span class="ar">نبني كل شيء، وأنت تنشر بنفسك</span><span class="svt">Vi bygger allt, du postar själv</span></div>
+    <div class="price">
+      <div class="row"><span class="k"><span class="ar">البناء (مرة واحدة)</span><span class="svt">Bygge (engång)</span></span><span class="v">12 000 kr</span></div>
+      <div class="row"><span class="k"><span class="ar">شهرياً</span><span class="svt">Per månad</span></span><span class="v">2 000 kr<small>/mån</small></span></div>
+    </div>
+    <ul class="feats">
+      <li><span class="ar">موقع مربوط بمخزون Blocket تلقائياً</span><span class="svt">Hemsida auto-synkad med Blocket-lagret</span></li>
+      <li><span class="ar">نظام الحجز</span><span class="svt">Bokningssystemet</span></li>
+      <li><span class="ar">ماكينة التقييمات</span><span class="svt">Omdömesmotorn</span></li>
+      <li><span class="ar">قوالب جاهزة للنشر</span><span class="svt">Färdiga inläggsmallar</span></li>
+    </ul>
+  </div>
+  <div class="plan feat">
+    <div class="ribbon"><span class="ar">الأنسب لك</span><span class="svt">Rekommenderas</span></div>
+    <div class="name">🥈 <span class="ar">مُدار</span><span class="svt">Skött</span></div>
+    <div class="tagline"><span class="ar">نحن نتولى كل شيء، أنت تبيع سيارات</span><span class="svt">Vi sköter allt, du säljer bilar</span></div>
+    <div class="price">
+      <div class="row"><span class="k"><span class="ar">البناء (مرة واحدة)</span><span class="svt">Bygge (engång)</span></span><span class="v">20 000 kr</span></div>
+      <div class="row"><span class="k"><span class="ar">شهرياً</span><span class="svt">Per månad</span></span><span class="v">6 500 kr<small>/mån</small></span></div>
+    </div>
+    <ul class="feats">
+      <li><span class="ar">كل ما في الأساس</span><span class="svt">Allt i Grund</span></li>
+      <li><span class="ar">8–12 منشور شهرياً، منفذ بالكامل (TikTok، إنستغرام، فيسبوك)</span><span class="svt">8–12 inlägg/mån, helt skött (TikTok, IG, FB)</span></li>
+      <li><span class="ar">تحسين صور كل سيارة جديدة بالذكاء الاصطناعي</span><span class="svt">AI-förbättrade bilder på varje ny bil</span></li>
+      <li><span class="ar">نرد على تقييمات Google باسمك</span><span class="svt">Vi svarar på Google-omdömen åt dig</span></li>
+      <li><span class="ar">شريك دائم، رقم واحد تتصل به</span><span class="svt">En fast partner, ett nummer att ringa</span></li>
+    </ul>
+  </div>
+  <div class="plan">
+    <div class="name">🥇 <span class="ar">الكامل</span><span class="svt">Full</span></div>
+    <div class="tagline"><span class="ar">مُدار + فيديو وإعلانات مدفوعة</span><span class="svt">Skött + film och annonser</span></div>
+    <div class="price">
+      <div class="row"><span class="k"><span class="ar">البناء (مرة واحدة)</span><span class="svt">Bygge (engång)</span></span><span class="v">30 000 kr</span></div>
+      <div class="row"><span class="k"><span class="ar">شهرياً</span><span class="svt">Per månad</span></span><span class="v">9 000 kr<small>/mån</small></span></div>
+    </div>
+    <ul class="feats">
+      <li><span class="ar">كل ما في مُدار</span><span class="svt">Allt i Skött</span></li>
+      <li><span class="ar">فيديو احترافي شهري</span><span class="svt">Professionell film varje månad</span></li>
+      <li><span class="ar">إعلانات مدفوعة مُدارة</span><span class="svt">Skötta betalannonser</span></li>
+      <li><span class="ar">بحث برقم اللوحة على الموقع</span><span class="svt">Regnr-sök på hemsidan</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="roi reveal">
+  <span class="ar"><b>حساب بسيط:</b> سيارة واحدة إضافية تنباع في الشهر تغطي تكلفة كل هذا النظام. والحجوزات التي لا تضيع لأن التلفون كان مشغول، هي ربح فوق ذلك.</span>
+  <span class="svt"><b>Enkel matematik:</b> en extra såld bil i månaden täcker hela systemet. Bokningarna som inte försvinner för att telefonen var upptagen är ren vinst ovanpå.</span>
+</div>
+<p class="fine">
+  <span class="ar">الأسعار بدون ضريبة (ex. moms). رخص الأدوات (BokaMera وغيرها) تُدفع مباشرة منكم. البناء يُدفع مقدماً.</span>
+  <span class="svt">Priser ex. moms. Verktygslicenser (BokaMera m.fl.) betalas direkt av er. Bygget faktureras i förskott.</span>
+</p>
+
+<!-- ============ CTA ============ -->
+<div class="cta reveal">
+  <h2><span class="ar">الخطوة التالية</span><span class="svt">Nästa steg</span></h2>
+  <p>
+    <span class="ar">رد على رسالتي في واتساب وقل لي أي باقة تناسبكم، أو خبرني إذا تريد أن نراجعها مع نبز. نقدر نبدأ هذا الأسبوع.</span>
+    <span class="svt">Svara på mitt meddelande i WhatsApp och säg vilket paket som passar er, eller om du vill gå igenom det med Nabaz. Vi kan börja redan denna vecka.</span>
+  </p>
+</div>
+
+<footer>
+  <div><b>Ikapp</b> · Jönköping</div>
+  <div>jude@ikapp.ai · @joudgor · powered by Ikapp.ai</div>
+</footer>
+
+</div>
+<script>
+// language toggle
+function toggleLang(){
+  var sv = document.body.classList.toggle('sv');
+  document.documentElement.setAttribute('dir', sv ? 'ltr' : 'rtl');
+  document.documentElement.setAttribute('lang', sv ? 'sv' : 'ar');
+  document.getElementById('langbtn').textContent = sv ? 'عربي' : 'Svenska';
+}
+// booking demo
+var svc=null, slot=null;
+document.querySelectorAll('#svc .chip').forEach(function(b){
+  b.onclick=function(){document.querySelectorAll('#svc .chip').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');svc=b.dataset.v;check();};
+});
+document.querySelectorAll('#slots .slot').forEach(function(b){
+  b.onclick=function(){document.querySelectorAll('#slots .slot').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');slot=b.dataset.v;check();};
+});
+document.getElementById('reg').addEventListener('input',check);
+function check(){
+  var reg=document.getElementById('reg').value.trim();
+  document.getElementById('bookbtn').disabled=!(svc&&slot&&reg.length>=5);
+}
+function book(){
+  var reg=document.getElementById('reg').value.trim().toUpperCase();
+  var sv=document.body.classList.contains('sv');
+  var box=document.getElementById('smsbox'), bub=document.getElementById('smsbubble');
+  box.classList.remove('hidden');
+  bub.textContent='';bub.classList.remove('show');
+  var msg=sv
+    ? 'Ny bokning ✓\n'+reg+' · '+svc+'\n'+slot+'\nKund: 070-XXX XX XX'
+    : 'حجز جديد ✓\n'+reg+' · '+svc+'\n'+slot+'\nالزبون: 070-XXX XX XX';
+  setTimeout(function(){bub.textContent=msg;bub.classList.add('show');
+    box.scrollIntoView({behavior:'smooth',block:'nearest'});},350);
+}
+// review demo
+function review(){
+  var sv=document.body.classList.contains('sv');
+  var sms=document.getElementById('revsms'), bub=document.getElementById('revbubble');
+  var card=document.getElementById('gcard'), nr=document.getElementById('newrev');
+  var hint=document.getElementById('revhint');
+  document.getElementById('revbtn').disabled=true;
+  sms.classList.remove('hidden');
+  var msg=sv
+    ? 'Hej! Tack för att du valde Knallelands Bilcenter. Blev du nöjd? Lämna gärna ett omdöme, det betyder mycket för oss: g.page/r/…'
+    : 'Hej! Tack för att du valde Knallelands Bilcenter. Blev du nöjd? Lämna gärna ett omdöme, det betyder mycket för oss: g.page/r/…';
+  setTimeout(function(){bub.textContent=msg;bub.classList.add('show');},350);
+  setTimeout(function(){card.classList.remove('hidden');},1500);
+  setTimeout(function(){nr.classList.add('show');
+    document.getElementById('gstars').textContent='★★★★★';
+    document.getElementById('gmeta').textContent='4,1 · 33 recensioner';
+    hint.classList.remove('hidden');
+    card.scrollIntoView({behavior:'smooth',block:'nearest'});},2400);
+}
+// before/after slider
+(function(){
+  var ba=document.getElementById('ba'), after=ba.querySelector('.after');
+  var bar=document.getElementById('babar'), knob=document.getElementById('baknob');
+  function set(x){
+    var r=ba.getBoundingClientRect();
+    var p=Math.max(4,Math.min(96,(x-r.left)/r.width*100));
+    after.style.clipPath='inset(0 0 0 '+p+'%)';
+    bar.style.left=p+'%';knob.style.left=p+'%';
+  }
+  var drag=false;
+  ba.addEventListener('pointerdown',function(e){drag=true;set(e.clientX);ba.setPointerCapture(e.pointerId);});
+  ba.addEventListener('pointermove',function(e){if(drag)set(e.clientX);});
+  ba.addEventListener('pointerup',function(){drag=false;});
+})();
+// reveal
+var io=new IntersectionObserver(function(es){es.forEach(function(e){
+  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},
+  {threshold:0,rootMargin:'0px 0px 12% 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+</script>
+</body>
+</html>
