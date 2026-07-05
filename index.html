@@ -1,456 +1,1049 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="sv" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Knallelands Bilcenter × Ikapp</title>
+<title>Knallelands Bilcenter · Verkstad och bilar i Borås</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a1c1e'/%3E%3Ctext x='32' y='44' font-family='Arial' font-size='34' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500..700&family=Inter:wght@400..700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#14181f; --muted:#5b6472; --line:#e7e3dc; --bg:#faf9f7; --card:#ffffff;
-    --accent:#1f6f8b; --accent-dark:#144e63; --gold:#b7883b; --good:#1f8b5f;
-    --sms:#e9f4ee;
+    --ink:#1a1c1e;
+    --muted:#5c6165;
+    --line:#e4e4df;
+    --bg:#fafaf8;
+    --bg2:#f0f0ec;
+    --card:#ffffff;
+    --accent:#1c4e6b;
+    --accent-dark:#16405a;
+    --accent-top:#26607f;
+    --radius:12px;
+    --maxw:1120px;
+    --head:"Inter Tight","Inter",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   }
   *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
   html,body{margin:0;padding:0}
-  body{background:var(--bg);color:var(--ink);
-    font-family:"IBM Plex Sans Arabic",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-    line-height:1.6;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:760px;margin:0 auto;padding:22px 18px 60px}
-  header{border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:6px;
-    display:flex;justify-content:space-between;align-items:center;gap:10px}
-  .brand{font-weight:700;letter-spacing:.02em;font-size:13px;text-transform:uppercase}
-  .brand span{color:var(--accent)}
-  .langbtn{border:1px solid var(--line);background:var(--card);border-radius:20px;
-    padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink);
-    font-family:inherit}
-  h1{font-size:clamp(25px,6vw,38px);line-height:1.2;margin:18px 0 6px;letter-spacing:-.01em}
-  .lead{color:var(--muted);font-size:clamp(15px,2.6vw,17px);max-width:56ch;margin:0}
-  .sechead{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--accent);
-    margin:46px 0 2px;font-weight:700}
-  .sechead .num{color:var(--gold)}
-  h2{font-size:clamp(20px,3.6vw,25px);margin:2px 0 4px;letter-spacing:-.01em}
-  .sub{color:var(--muted);font-size:14.5px;margin:0 0 16px}
-  .demo{background:var(--card);border:1px solid var(--line);border-radius:16px;
-    padding:18px;box-shadow:0 1px 0 rgba(20,24,31,.02)}
-  .dtag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.07em;
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:"Inter",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased;
+    letter-spacing:-0.008em;
+  }
+  [dir="rtl"] body, html[dir="rtl"] body{
+    font-family:"Segoe UI","Noto Naskh Arabic",Tahoma,Arial,sans-serif;
+    letter-spacing:0;
+  }
+  img,svg{max-width:100%}
+  a{color:inherit}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:20px}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;background:rgba(250,250,248,.92);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+  }
+  .hrow{display:flex;align-items:center;gap:16px;height:64px}
+  .brand{font-family:var(--head);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+    text-decoration:none;line-height:1.25;white-space:nowrap}
+  .brand small{display:block;font-weight:500;font-size:10px;letter-spacing:.22em;color:var(--muted)}
+  nav.main{display:none;gap:28px;margin-inline-start:24px}
+  nav.main a{text-decoration:none;font-size:14px;font-weight:500;color:var(--muted);transition:color .12s}
+  nav.main a:hover{color:var(--ink)}
+  .hspacer{flex:1}
+  .lang{display:flex;align-items:center;gap:2px;border:1px solid var(--line);border-radius:999px;
+    padding:2px;background:var(--bg2)}
+  .lang button{
+    border:0;background:none;cursor:pointer;font-family:inherit;border-radius:999px;
+    font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--muted);
+    padding:6px 10px;line-height:1;transition:color .12s,background .12s;
+  }
+  .lang button:hover{color:var(--ink)}
+  .lang button.on{color:var(--ink);background:var(--card);
+    box-shadow:0 1px 2px rgba(26,28,30,.10),0 0 0 1px var(--line)}
+  .callbtn{display:flex;align-items:center;gap:8px;text-decoration:none;
+    border:1px solid rgba(26,28,30,.35);border-radius:999px;padding:8px 14px;
+    font-size:13px;font-weight:600;white-space:nowrap;background:transparent;
+    transition:border-color .12s,background .12s}
+  .callbtn:hover{border-color:var(--ink);background:rgba(26,28,30,.04)}
+  .callbtn svg{flex:none}
+  .callbtn .num{display:none}
+  @media(min-width:560px){.callbtn .num{display:inline}}
+  @media(min-width:900px){nav.main{display:flex}}
+
+  /* ---------- shared ---------- */
+  section{padding-block:84px}
+  @media(min-width:900px){section{padding-block:128px}}
+  .kicker{font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--muted);margin:0 0 16px}
+  h1,h2,h3{margin:0;font-family:var(--head);letter-spacing:-.03em;line-height:1.06}
+  h1{font-size:clamp(36px,5.6vw,62px);font-weight:650;letter-spacing:-.035em}
+  h2{font-size:clamp(27px,3.6vw,40px);font-weight:650}
+  h3{font-size:17px;font-weight:600;letter-spacing:-.015em;line-height:1.25}
+  [dir="rtl"] h1,[dir="rtl"] h2,[dir="rtl"] h3{letter-spacing:0}
+  .num,.price,.carprice .p,.hours .hrowl b,.ratline b{font-variant-numeric:tabular-nums}
+  .lead{color:var(--muted);font-size:clamp(16px,2vw,18px);max-width:52ch;margin:20px 0 0}
+  .subline{color:var(--muted);font-size:16px;max-width:60ch;margin:16px 0 0}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    border-radius:10px;padding:15px 26px;font-size:15px;font-weight:600;
+    letter-spacing:-.01em;text-decoration:none;border:1px solid transparent;cursor:pointer;
+    font-family:inherit;line-height:1;
+    transition:background .15s,border-color .15s,box-shadow .18s,transform .12s}
+  .btn.primary{
+    color:#fff;border-color:var(--accent-dark);
+    background:linear-gradient(180deg,var(--accent-top) 0%,var(--accent) 55%,#173f57 100%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.30),inset 0 -1px 0 rgba(10,30,44,.25),
+      0 1px 2px rgba(26,28,30,.16),0 8px 20px -8px rgba(28,78,107,.55);
+    text-shadow:0 1px 1px rgba(10,30,44,.25);
+  }
+  .btn.primary:hover{
+    transform:translateY(-1px);
+    background:linear-gradient(180deg,#2b688a 0%,#205876 55%,#1a4762 100%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.34),inset 0 -1px 0 rgba(10,30,44,.25),
+      0 2px 4px rgba(26,28,30,.14),0 12px 26px -8px rgba(28,78,107,.60);
+  }
+  .btn.primary:active{
+    transform:translateY(0);
+    background:linear-gradient(180deg,#1a4a66 0%,#1c4e6b 60%,#1c4e6b 100%);
+    box-shadow:inset 0 2px 4px rgba(10,30,44,.30),0 1px 2px rgba(26,28,30,.12);
+  }
+  .btn.ghost{background:transparent;border-color:rgba(26,28,30,.35);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--ink);background:rgba(26,28,30,.04)}
+  .btn.ghost:active{background:rgba(26,28,30,.08)}
+  .demotag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.09em;
     text-transform:uppercase;color:var(--muted);border:1px solid var(--line);
-    border-radius:20px;padding:2px 9px;margin-bottom:12px}
-  /* booking form */
-  .f label{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin:12px 0 5px}
+    border-radius:999px;padding:3px 10px;background:var(--bg)}
+
+  /* ---------- hero ---------- */
+  .hero{padding-block:72px 84px;border-bottom:1px solid var(--line)}
+  @media(min-width:900px){.hero{padding-block:112px 120px}}
+  .herogrid{display:grid;gap:48px;align-items:start}
+  @media(min-width:960px){.herogrid{grid-template-columns:1.05fr .95fr;gap:64px}}
+  .heroctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+  .heronote{margin-top:22px;font-size:13.5px;color:var(--muted)}
+  .heronote b{color:var(--ink)}
+
+  /* booking card */
+  .bookcard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:28px 26px;box-shadow:0 1px 2px rgba(26,28,30,.04),0 16px 40px -24px rgba(26,28,30,.18)}
+  .bookcard .bhead{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:4px}
+  .bookcard h3{font-size:19px}
+  .f label{display:block;font-size:11.5px;font-weight:600;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--muted);margin:22px 0 8px}
   .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:9px 13px;
-    font-size:14px;cursor:pointer;font-family:inherit;color:var(--ink);transition:all .12s}
-  .chip.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
-  .f input{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;
+  .chip{border:1px solid var(--line);background:var(--bg);border-radius:9px;padding:10px 14px;
+    font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;color:var(--ink);
+    transition:border-color .12s,background .12s}
+  .chip:hover{border-color:rgba(26,28,30,.4)}
+  .chip.on{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:600}
+  .f input{width:100%;border:1px solid var(--line);border-radius:9px;padding:12px 14px;
     font-size:16px;font-family:inherit;background:var(--bg);color:var(--ink)}
   .f input:focus{outline:2px solid var(--accent);outline-offset:-1px}
-  .regnr{letter-spacing:.18em;font-weight:700;text-transform:uppercase;text-align:center}
+  .regnr{letter-spacing:.16em;font-weight:600;text-transform:uppercase}
+  .frow{display:grid;grid-template-columns:1fr;gap:0 12px}
+  @media(min-width:420px){.frow{grid-template-columns:1fr 1fr}}
+  .frow > div label{margin-top:20px}
   .slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-  .slot{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:9px 4px;
-    font-size:13px;cursor:pointer;font-family:inherit;text-align:center;color:var(--ink)}
-  .slot.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
-  .go{width:100%;margin-top:16px;border:0;background:var(--accent);color:#fff;font-weight:700;
-    font-size:15.5px;padding:13px;border-radius:11px;cursor:pointer;font-family:inherit;
-    transition:background .12s}
-  .go:hover{background:var(--accent-dark)}
-  .go:disabled{opacity:.45;cursor:not-allowed}
-  /* sms bubble */
-  .phone{background:#f4f2ee;border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:14px}
-  .phone .from{font-size:11px;color:var(--muted);font-weight:600;margin-bottom:6px}
-  .bubble{background:var(--sms);border:1px solid #cfe6d9;border-radius:12px;padding:11px 13px;
-    font-size:14px;max-width:92%;opacity:0;transform:translateY(8px);
-    transition:opacity .5s,transform .5s;white-space:pre-line}
-  .bubble.show{opacity:1;transform:none}
-  .bubble b{color:var(--good)}
-  .hint{font-size:12.5px;color:var(--muted);margin-top:10px}
-  .hidden{display:none !important}
-  /* review card */
-  .gcard{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:14px;background:#fff;direction:ltr;text-align:left}
-  .gcard .gname{font-weight:700;font-size:14.5px}
-  .stars{color:#f5a623;font-size:17px;letter-spacing:2px}
-  .gmeta{font-size:12.5px;color:var(--muted)}
-  .newrev{border-top:1px dashed var(--line);margin-top:10px;padding-top:10px;
-    opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s}
-  .newrev.show{opacity:1;transform:none}
-  .newrev .who{font-size:13px;font-weight:600}
-  .newrev .txt{font-size:13px;color:var(--muted)}
-  /* before/after */
-  .ba{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);
-    margin-top:14px;touch-action:none;user-select:none;direction:ltr}
-  .ba svg{display:block;width:100%;height:auto}
-  .ba .after{position:absolute;inset:0;clip-path:inset(0 0 0 50%)}
-  .ba .bar{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;
-    box-shadow:0 0 8px rgba(0,0,0,.4);transform:translateX(-1.5px)}
-  .ba .knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-    width:38px;height:38px;border-radius:50%;background:#fff;display:flex;align-items:center;
-    justify-content:center;font-weight:700;color:var(--ink);box-shadow:0 2px 10px rgba(0,0,0,.3);
-    font-size:15px}
-  .balabel{position:absolute;top:10px;font-size:11px;font-weight:700;letter-spacing:.05em;
-    padding:3px 9px;border-radius:14px;color:#fff;background:rgba(20,24,31,.65)}
-  .balabel.l{left:10px}.balabel.r{right:10px}
-  /* plans */
-  .plans{display:grid;grid-template-columns:1fr;gap:14px;margin-top:16px}
-  @media(min-width:700px){.plans{grid-template-columns:repeat(3,1fr)}}
-  .plan{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;
-    display:flex;flex-direction:column}
-  .plan.feat{border:2px solid var(--accent);box-shadow:0 10px 30px rgba(31,111,139,.12)}
-  .plan .ribbon{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.06em;
-    color:#fff;background:var(--accent);border-radius:20px;padding:3px 10px;margin-bottom:10px}
-  .plan .name{font-weight:700;font-size:17px}
-  .plan .tagline{color:var(--muted);font-size:13.5px;margin:4px 0 14px}
-  .price{border-top:1px solid var(--line);padding-top:12px;margin-bottom:12px}
-  .price .row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
-  .price .k{font-size:12px;color:var(--muted)}
-  .price .v{font-size:18px;font-weight:700}
-  .price .v small{font-size:11.5px;font-weight:500;color:var(--muted)}
-  ul.feats{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
-  ul.feats li{font-size:13.5px;padding-inline-start:22px;position:relative}
-  ul.feats li::before{content:"✓";position:absolute;inset-inline-start:0;top:0;
-    color:var(--good);font-weight:700}
-  .roi{background:#f2efe9;border:1px solid var(--line);border-radius:12px;padding:14px 16px;
-    font-size:14.5px;margin-top:16px}
-  .roi b{color:var(--accent-dark)}
-  .fine{color:var(--muted);font-size:12px;margin-top:10px}
-  /* cta */
-  .cta{background:var(--ink);color:#fff;border-radius:18px;padding:26px 22px;margin-top:50px;text-align:center}
-  .cta h2{color:#fff;margin:0 0 6px}
-  .cta p{color:#c9cdd4;font-size:14.5px;margin:0;max-width:44ch;margin-inline:auto}
-  footer{margin-top:44px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);
-    font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-  footer b{color:var(--ink)}
-  /* lang switching */
-  body.sv .ar{display:none}
-  body:not(.sv) .svt{display:none}
-  .reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
-  .reveal.in{opacity:1;transform:none}
+  .slot{border:1px solid var(--line);background:var(--bg);border-radius:9px;padding:10px 4px;
+    font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;text-align:center;color:var(--ink);
+    font-variant-numeric:tabular-nums;transition:border-color .12s}
+  .slot:hover{border-color:rgba(26,28,30,.4)}
+  .slot.on{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:600}
+  .go{width:100%;margin-top:24px}
+  .go:disabled{background:var(--bg2);color:#9b9e99;cursor:not-allowed;border-color:var(--line);
+    box-shadow:none;text-shadow:none;transform:none}
+  .go:disabled:hover{background:var(--bg2);box-shadow:none;transform:none}
+  .formfine{font-size:12px;color:var(--muted);margin:12px 0 0;text-align:center}
+  .confirm{display:none;margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
+  .confirm.show{display:block}
+  .confirm .cline{font-weight:600;font-size:15px}
+  .confirm .csum{font-size:14px;color:var(--muted);margin-top:4px}
+
+  /* ---------- usp row ---------- */
+  .usps{border-bottom:1px solid var(--line);padding-block:0}
+  .uspgrid{display:grid;grid-template-columns:1fr 1fr}
+  @media(min-width:900px){.uspgrid{grid-template-columns:repeat(4,1fr)}}
+  .usp{padding:26px 20px;border-top:1px solid var(--line)}
+  .uspgrid .usp:nth-child(odd){border-inline-end:1px solid var(--line)}
+  @media(min-width:900px){
+    .uspgrid .usp{border-top:0;border-inline-end:1px solid var(--line);padding:34px 26px}
+    .uspgrid .usp:last-child{border-inline-end:0}
+  }
+  .usp h3{font-size:15px;margin-bottom:4px}
+  .usp p{margin:0;font-size:13.5px;color:var(--muted)}
+  .usp .uic{color:var(--ink);margin-bottom:14px}
+
+  /* ---------- services ---------- */
+  .svcgrid{display:grid;gap:14px;margin-top:44px}
+  @media(min-width:720px){.svcgrid{grid-template-columns:1fr 1fr}}
+  @media(min-width:1020px){.svcgrid{grid-template-columns:repeat(4,1fr)}}
+  .svc{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px;display:flex;flex-direction:column;gap:6px;transition:box-shadow .18s}
+  .svc:hover{box-shadow:0 12px 32px -20px rgba(26,28,30,.25)}
+  .svc .sic{color:var(--ink);margin-bottom:10px}
+  .svc p{margin:0;font-size:13.5px;color:var(--muted);flex:1}
+  .svc .price{font-family:var(--head);font-size:19px;font-weight:650;letter-spacing:-.02em;margin-top:16px}
+  .svc a{font-size:13.5px;font-weight:600;color:var(--accent);text-decoration:none;margin-top:4px}
+  .svc a:hover{text-decoration:underline}
+
+  /* trust trio */
+  .trio{display:grid;gap:14px;margin-top:44px}
+  @media(min-width:840px){.trio{grid-template-columns:repeat(3,1fr)}}
+  .tcard{border:1px solid var(--line);border-radius:var(--radius);padding:28px;background:var(--bg2)}
+  .tcard h3{margin-bottom:8px}
+  .tcard p{margin:0;font-size:14px;color:var(--muted)}
+  .tcard .tnum{font-size:11.5px;font-weight:600;color:var(--accent);letter-spacing:.14em;
+    text-transform:uppercase;margin-bottom:16px}
+
+  /* ---------- cars ---------- */
+  .cars{background:var(--card);border-block:1px solid var(--line)}
+  .carhead{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:18px}
+  .filter{display:flex;flex-wrap:wrap;gap:8px;margin-top:36px}
+  .cargrid{display:grid;gap:18px;margin-top:26px}
+  @media(min-width:680px){.cargrid{grid-template-columns:1fr 1fr}}
+  @media(min-width:1020px){.cargrid{grid-template-columns:repeat(3,1fr)}}
+  .car{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg);
+    display:flex;flex-direction:column;transition:box-shadow .18s,transform .18s}
+  .car:hover{box-shadow:0 12px 32px rgba(26,28,30,.08);transform:translateY(-2px)}
+  .carimgbox{position:relative;background:var(--bg2)}
+  .carph{aspect-ratio:700/420;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:10px;background:linear-gradient(180deg,#f1f1ee,#e7e7e2);
+    color:#a5a8a4}
+  .carph span{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+  .badge{position:absolute;top:10px;inset-inline-end:10px;font-size:11px;font-weight:600;
+    letter-spacing:.04em;color:var(--ink);background:#fff;border:1px solid var(--line);
+    border-radius:999px;padding:4px 11px}
+  .carbody{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}
+  .car h3{font-size:16.5px}
+  .car .trim{font-size:13.5px;color:var(--muted);margin:2px 0 0}
+  .specs{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:14px;padding-top:14px;
+    border-top:1px solid var(--line)}
+  .spec{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;color:var(--muted);
+    font-variant-numeric:tabular-nums}
+  .spec svg{color:#a0a3a0;flex:none}
+  .carfoot{display:flex;align-items:end;justify-content:space-between;gap:10px;margin-top:18px;flex:1}
+  .carprice{align-self:end}
+  .carprice .p{font-family:var(--head);font-size:24px;font-weight:650;letter-spacing:-.025em;line-height:1}
+  .carprice .moms{font-size:11.5px;color:var(--muted);font-weight:500;margin-top:3px}
+  .carfoot a{font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap}
+  .carfoot a:hover{text-decoration:underline}
+  .car.hide{display:none}
+
+  /* ---------- reviews ---------- */
+  .ratline{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:24px}
+  .stars{display:inline-flex;gap:3px;color:#c9ccc8}
+  .stars svg,.rstars svg{flex:none}
+  .ratline b{font-size:17px}
+  .ratline span{font-size:14px;color:var(--muted)}
+  .revgrid{display:grid;gap:14px;margin-top:40px}
+  @media(min-width:840px){.revgrid{grid-template-columns:repeat(3,1fr)}}
+  .rev{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;
+    display:flex;flex-direction:column;gap:12px}
+  .rev .demotag{align-self:flex-start}
+  .rev .rstars{display:inline-flex;gap:3px;color:var(--ink)}
+  .rev p{margin:0;font-size:14.5px;flex:1}
+  .rev .who{font-size:12.5px;font-weight:600;color:var(--muted)}
+
+  /* ---------- visit ---------- */
+  .visitgrid{display:grid;gap:40px;margin-top:44px}
+  @media(min-width:900px){.visitgrid{grid-template-columns:1fr 1fr;gap:72px}}
+  .hours{border-top:1px solid var(--line)}
+  .hours .hrowl{display:flex;justify-content:space-between;padding:13px 2px;
+    border-bottom:1px solid var(--line);font-size:15px}
+  .hours .hrowl b{font-weight:600}
+  .visitinfo p{margin:0 0 6px;font-size:15px}
+  .visitinfo .vl{font-size:11.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--muted);margin:22px 0 6px}
+  .visitctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line);padding:44px 0 120px;background:var(--card)}
+  @media(min-width:900px){footer{padding-bottom:44px}}
+  .fgrid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px}
+  .fgrid .fb{font-family:var(--head);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+  .fgrid p{margin:6px 0 0;font-size:13.5px;color:var(--muted)}
+  .demoline{margin-top:32px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12.5px;color:var(--muted)}
+  .demoline a{color:var(--accent);text-decoration:none;font-weight:600}
+  .demoline a:hover{text-decoration:underline}
+
+  /* mobile action bar */
+  .mbar{position:fixed;bottom:0;inset-inline:0;z-index:60;display:grid;grid-template-columns:1fr 1fr;
+    gap:1px;background:var(--line);border-top:1px solid var(--line)}
+  .mbar a{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--ink);
+    color:#fff;text-decoration:none;font-size:14px;font-weight:600;padding:15px 8px}
+  .mbar a.wa{background:linear-gradient(180deg,var(--accent-top),var(--accent));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.22)}
+  @media(min-width:900px){.mbar{display:none}}
+
+  /* demo toast */
+  .toast{position:fixed;bottom:84px;left:50%;transform:translateX(-50%);background:var(--ink);
+    color:#fff;font-size:13.5px;font-weight:500;padding:11px 18px;border-radius:999px;z-index:80;
+    box-shadow:0 8px 24px rgba(26,28,30,.25);
+    opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap;max-width:92vw}
+  .toast.show{opacity:1}
+  @media(min-width:900px){.toast{bottom:28px}}
 </style>
 </head>
 <body>
-<div class="wrap">
 
 <header>
-  <div class="brand">KNALLELANDS BILCENTER <span>×</span> IKAPP</div>
-  <button class="langbtn" id="langbtn" onclick="toggleLang()">Svenska</button>
+  <div class="wrap hrow">
+    <a class="brand" href="#top">Knallelands<small data-i18n="brand_sub">Bilcenter · Borås</small></a>
+    <nav class="main">
+      <a href="#verkstad" data-i18n="nav_workshop">Verkstad</a>
+      <a href="#bilar" data-i18n="nav_cars">Bilar i lager</a>
+      <a href="#omdomen" data-i18n="nav_reviews">Omdömen</a>
+      <a href="#hitta" data-i18n="nav_visit">Hitta hit</a>
+    </nav>
+    <div class="hspacer"></div>
+    <div class="lang" role="group" aria-label="Språk" data-i18n-aria="lang_label">
+      <button type="button" data-lang="sv">SV</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="ar">AR</button>
+    </div>
+    <a class="callbtn" href="tel:+4633123456">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span class="num" dir="ltr">033-123 45 67</span>
+    </a>
+  </div>
 </header>
 
-<h1>
-  <span class="ar">هذا ليس عرض شرائح. هذا النظام نفسه، جرّبه بيدك.</span>
-  <span class="svt">Det här är ingen presentation. Det är själva systemet, testa det själv.</span>
-</h1>
-<p class="lead">
-  <span class="ar">ثلاث تجارب حيّة: الحجز بدون تلفون، تقييمات Google تتحسن لوحدها، وصور سيارات بمستوى معرض. كل شيء تحت يعمل الآن، اضغط وجرّب.</span>
-  <span class="svt">Tre saker som fungerar live: bokning utan telefonsamtal, Google-omdömen som växer av sig själva, och bilbilder i showroom-klass. Allt nedan fungerar nu, tryck och testa.</span>
-</p>
+<main id="top">
 
-<!-- ============ 1. BOOKING ============ -->
-<div class="sechead reveal"><span class="num">01</span> <span class="ar">الحجز</span><span class="svt">Bokning</span></div>
-<h2 class="reveal">
-  <span class="ar">الزبون يحجز بنفسه. أنت لا ترد على التلفون.</span>
-  <span class="svt">Kunden bokar själv. Du slipper telefonen.</span>
-</h2>
-<p class="sub reveal">
-  <span class="ar">الزبون يدخل رقم اللوحة ويختار الخدمة والوقت. أنت تستلم رسالة جاهزة فيها كل التفاصيل. جرّب:</span>
-  <span class="svt">Kunden fyller i regnummer, väljer tjänst och tid. Du får ett SMS med alla detaljer. Testa:</span>
-</p>
-
-<div class="demo reveal">
-  <span class="dtag"><span class="ar">تجربة حيّة</span><span class="svt">Live demo</span></span>
-  <div class="f">
-    <label><span class="ar">ماذا تحتاج؟</span><span class="svt">Vad behöver du?</span></label>
-    <div class="chips" id="svc">
-      <button class="chip" data-v="Däckbyte"><span class="ar">تغيير إطارات</span><span class="svt">Däckbyte</span></button>
-      <button class="chip" data-v="Service"><span class="ar">سيرفيس</span><span class="svt">Service</span></button>
-      <button class="chip" data-v="Reparation"><span class="ar">تصليح</span><span class="svt">Reparation</span></button>
-      <button class="chip" data-v="Diagnos"><span class="ar">فحص كمبيوتر</span><span class="svt">Diagnos</span></button>
+<!-- ============ HERO + BOOKING ============ -->
+<section class="hero">
+  <div class="wrap herogrid">
+    <div>
+      <p class="kicker" data-i18n="hero_kicker">Bilverkstad och bilhandel i Borås</p>
+      <h1 data-i18n="hero_h1">Boka verkstadstid på två minuter. Utan telefonkö.</h1>
+      <p class="lead" data-i18n="hero_lead">Service, reparation och däck i vår egen verkstad i Knalleland. Välj ärende, ange registreringsnummer och önskad tid. Vi bekräftar samma dag.</p>
+      <div class="heroctas">
+        <a class="btn primary" href="#boka" data-i18n="hero_cta_book">Boka verkstadstid</a>
+        <a class="btn ghost" href="https://wa.me/46701234567" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2a9.9 9.9 0 0 0-8.4 15.1L2 22l5-1.6A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.1 15.1l-.3-.18-3 .95.97-2.9-.2-.3A8.1 8.1 0 0 1 12.04 3.8zm-3.3 3.9c-.18 0-.47.07-.72.34-.24.27-.94.92-.94 2.24 0 1.32.96 2.6 1.1 2.78.13.18 1.87 2.98 4.62 4.06 2.29.9 2.75.72 3.25.68.5-.05 1.6-.66 1.83-1.29.23-.63.23-1.17.16-1.29-.07-.11-.25-.18-.52-.32-.27-.13-1.6-.79-1.85-.88-.25-.09-.43-.13-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.72-1.34-1.6-1.5-1.87-.16-.27-.02-.42.12-.55.12-.12.27-.32.4-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.13-.6-1.45-.83-1.98-.2-.47-.4-.42-.56-.43z"/></svg>
+          <span data-i18n="hero_cta_wa">Skriv på WhatsApp</span>
+        </a>
+      </div>
+      <p class="heronote"><span data-i18n="hero_note1">Svar samma dag.</span> <b data-i18n="hero_note2">Vi talar svenska och arabiska.</b></p>
     </div>
-    <label><span class="ar">رقم اللوحة</span><span class="svt">Registreringsnummer</span></label>
-    <input class="regnr" id="reg" maxlength="7" placeholder="ABC 123" autocomplete="off">
-    <label><span class="ar">اختر وقت</span><span class="svt">Välj tid</span></label>
-    <div class="slots" id="slots">
-      <button class="slot" data-v="Mån 08:30">Mån 08:30</button>
-      <button class="slot" data-v="Mån 13:00">Mån 13:00</button>
-      <button class="slot" data-v="Tis 09:00">Tis 09:00</button>
-      <button class="slot" data-v="Tis 15:30">Tis 15:30</button>
-      <button class="slot" data-v="Ons 08:30">Ons 08:30</button>
-      <button class="slot" data-v="Ons 11:00">Ons 11:00</button>
-    </div>
-    <button class="go" id="bookbtn" onclick="book()" disabled>
-      <span class="ar">احجز الآن</span><span class="svt">Boka nu</span>
-    </button>
-  </div>
-  <div class="phone hidden" id="smsbox">
-    <div class="from"><span class="ar">الرسالة التي تصلك أنت:</span><span class="svt">SMS:et som kommer till dig:</span></div>
-    <div class="bubble" id="smsbubble"></div>
-    <div class="hint">
-      <span class="ar">الزبون أيضاً يستلم تأكيد تلقائي برقم لوحته ووقته.</span>
-      <span class="svt">Kunden får samtidigt en automatisk bekräftelse med regnr och tid.</span>
-    </div>
-  </div>
-</div>
 
-<!-- ============ 2. REVIEWS ============ -->
-<div class="sechead reveal"><span class="num">02</span> <span class="ar">التقييمات</span><span class="svt">Omdömen</span></div>
-<h2 class="reveal">
-  <span class="ar">بعد كل شغلة، رسالة تلقائية. التقييمات تكبر لوحدها.</span>
-  <span class="svt">Efter varje jobb, ett automatiskt SMS. Omdömena växer av sig själva.</span>
-</h2>
-<p class="sub reveal">
-  <span class="ar">عندما تنتهي من سيارة، النظام يرسل للزبون رسالة لطيفة مع رابط التقييم. الزبون الراضي يضغط ويقيّم. هكذا يعمل:</span>
-  <span class="svt">När en bil är klar skickar systemet ett vänligt SMS med omdömeslänken. Nöjda kunder trycker och betygsätter. Så här funkar det:</span>
-</p>
-
-<div class="demo reveal">
-  <span class="dtag"><span class="ar">محاكاة</span><span class="svt">Simulering</span></span>
-  <button class="go" id="revbtn" onclick="review()">
-    <span class="ar">السيارة جاهزة، سلّمناها للزبون ←</span><span class="svt">Bilen är klar, kunden hämtar →</span>
-  </button>
-  <div class="phone hidden" id="revsms">
-    <div class="from"><span class="ar">الرسالة التي تصل الزبون:</span><span class="svt">SMS:et kunden får:</span></div>
-    <div class="bubble" id="revbubble"></div>
-  </div>
-  <div class="gcard hidden" id="gcard">
-    <div class="gname">Knallelands Bilcenter</div>
-    <div><span class="stars" id="gstars">★★★★☆</span> <span class="gmeta" id="gmeta">4,0 · 32 recensioner</span></div>
-    <div class="newrev" id="newrev">
-      <div class="who">Elin S. <span class="stars" style="font-size:13px">★★★★★</span></div>
-      <div class="txt">Snabb service och schysst pris. Fick SMS när bilen var klar. Rekommenderas!</div>
+    <div class="bookcard" id="boka">
+      <div class="bhead">
+        <h3 data-i18n="book_title">Boka verkstadstid</h3>
+        <span class="demotag" data-i18n="book_demo_tag">Demo</span>
+      </div>
+      <div class="f">
+        <label data-i18n="book_l_service">Ärende</label>
+        <div class="chips" id="svc">
+          <button type="button" class="chip" data-key="svc_service" data-i18n="svc_service">Service</button>
+          <button type="button" class="chip" data-key="svc_tires" data-i18n="svc_tires">Däckbyte</button>
+          <button type="button" class="chip" data-key="svc_repair" data-i18n="svc_repair">Reparation</button>
+          <button type="button" class="chip" data-key="svc_diag" data-i18n="svc_diag">Felsökning</button>
+        </div>
+        <label for="reg" data-i18n="book_l_reg">Registreringsnummer</label>
+        <input class="regnr" id="reg" maxlength="7" placeholder="ABC 123" autocomplete="off">
+        <div class="frow">
+          <div>
+            <label for="nm" data-i18n="book_l_name">Namn</label>
+            <input id="nm" autocomplete="off" data-i18n-ph="book_ph_name" placeholder="Ditt namn">
+          </div>
+          <div>
+            <label for="ph" data-i18n="book_l_phone">Telefon</label>
+            <input id="ph" inputmode="tel" autocomplete="off" dir="ltr" placeholder="070-000 00 00">
+          </div>
+        </div>
+        <label data-i18n="book_l_time">Önskad tid</label>
+        <div class="slots" id="slots">
+          <button type="button" class="slot" data-key="slot1" data-i18n="slot1">Mån 08:30</button>
+          <button type="button" class="slot" data-key="slot2" data-i18n="slot2">Mån 13:00</button>
+          <button type="button" class="slot" data-key="slot3" data-i18n="slot3">Tis 09:00</button>
+          <button type="button" class="slot" data-key="slot4" data-i18n="slot4">Tis 15:30</button>
+          <button type="button" class="slot" data-key="slot5" data-i18n="slot5">Ons 08:30</button>
+          <button type="button" class="slot" data-key="slot6" data-i18n="slot6">Ons 11:00</button>
+        </div>
+        <button class="btn primary go" id="bookbtn" type="button" disabled data-i18n="book_send">Skicka bokningsförfrågan</button>
+        <p class="formfine" data-i18n="book_fine">Demoformulär. Ingen bokning skickas.</p>
+        <div class="confirm" id="confirm">
+          <div class="cline" data-i18n="book_c_line">Tack. Vi bekräftar din tid via telefon eller SMS.</div>
+          <div class="csum" id="csum"></div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="hint hidden" id="revhint">
-    <span class="ar">كل أسبوع بدون هذا النظام = تقييمات ضائعة. المشتري يقارن النجوم قبل ما يتصل.</span>
-    <span class="svt">Varje vecka utan detta = förlorade omdömen. Köpare jämför stjärnor innan de ringer.</span>
-  </div>
-</div>
+</section>
 
-<!-- ============ 3. AI PHOTOS ============ -->
-<div class="sechead reveal"><span class="num">03</span> <span class="ar">صور السيارات</span><span class="svt">Bilbilder</span></div>
-<h2 class="reveal">
-  <span class="ar">نفس السيارة. صورة بمستوى معرض.</span>
-  <span class="svt">Samma bil. Bild i showroom-klass.</span>
-</h2>
-<p class="sub reveal">
-  <span class="ar">تصوّر السيارة بموبايلك في الساحة، ونحن نحولها بالذكاء الاصطناعي إلى صورة استوديو. اسحب الخط:</span>
-  <span class="svt">Du fotar bilen med mobilen på gården, vi gör om den med AI till en studiobild. Dra i linjen:</span>
-</p>
-
-<div class="ba reveal" id="ba">
-  <!-- BEFORE: gritty parking lot -->
-  <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg">
-    <rect width="700" height="420" fill="#b9b6ae"/>
-    <rect y="250" width="700" height="170" fill="#8f8c85"/>
-    <line x1="60" y1="380" x2="180" y2="380" stroke="#d8d5cc" stroke-width="6"/>
-    <line x1="300" y1="395" x2="430" y2="395" stroke="#d8d5cc" stroke-width="6"/>
-    <line x1="540" y1="380" x2="660" y2="380" stroke="#d8d5cc" stroke-width="6"/>
-    <rect x="0" y="120" width="700" height="10" fill="#a3a099"/>
-    <g opacity=".55"><rect x="20" y="60" width="90" height="190" fill="#7d7a74"/><rect x="590" y="70" width="90" height="180" fill="#7d7a74"/></g>
-    <ellipse cx="350" cy="330" rx="230" ry="22" fill="#000" opacity=".28"/>
-    <g id="car1">
-      <path d="M140 300 q4 -50 60 -62 q40 -46 120 -50 q95 -5 150 42 q14 12 22 14 q70 10 78 42 q6 22 -8 26 l-30 4 q-10 -34 -46 -34 q-36 0 -44 34 l-190 0 q-10 -34 -46 -34 q-36 0 -44 34 l-16 -2 q-10 -4 -6 -14 z" fill="#6e7d8a"/>
-      <path d="M230 244 q36 -40 106 -44 l6 44 z" fill="#9fb2c0" opacity=".85"/>
-      <path d="M356 200 q80 -2 128 40 l-124 4 z" fill="#9fb2c0" opacity=".85"/>
-      <circle cx="216" cy="304" r="30" fill="#2c313a"/><circle cx="216" cy="304" r="13" fill="#555c66"/>
-      <circle cx="496" cy="304" r="30" fill="#2c313a"/><circle cx="496" cy="304" r="13" fill="#555c66"/>
-    </g>
-    <text x="350" y="35" font-family="Arial" font-size="15" fill="#5c5952" text-anchor="middle" opacity=".8">foto: mobilkamera, parkering</text>
-  </svg>
-  <div class="after">
-    <!-- AFTER: studio -->
-    <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="spot" cx="50%" cy="30%" r="75%">
-          <stop offset="0%" stop-color="#3a4450"/><stop offset="100%" stop-color="#12161c"/>
-        </radialGradient>
-        <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#232a33"/><stop offset="100%" stop-color="#0c0f13"/>
-        </linearGradient>
-        <linearGradient id="paint" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#3d8ab0"/><stop offset="55%" stop-color="#1f6f8b"/><stop offset="100%" stop-color="#144e63"/>
-        </linearGradient>
-      </defs>
-      <rect width="700" height="420" fill="url(#spot)"/>
-      <rect y="250" width="700" height="170" fill="url(#floor)"/>
-      <ellipse cx="350" cy="332" rx="250" ry="26" fill="#000" opacity=".55"/>
-      <g>
-        <path d="M140 300 q4 -50 60 -62 q40 -46 120 -50 q95 -5 150 42 q14 12 22 14 q70 10 78 42 q6 22 -8 26 l-30 4 q-10 -34 -46 -34 q-36 0 -44 34 l-190 0 q-10 -34 -46 -34 q-36 0 -44 34 l-16 -2 q-10 -4 -6 -14 z" fill="url(#paint)"/>
-        <path d="M150 288 q60 -18 200 -20 q140 -2 210 16" stroke="#bfe3f2" stroke-width="3" fill="none" opacity=".5"/>
-        <path d="M230 244 q36 -40 106 -44 l6 44 z" fill="#cfe9f5" opacity=".9"/>
-        <path d="M356 200 q80 -2 128 40 l-124 4 z" fill="#cfe9f5" opacity=".9"/>
-        <circle cx="216" cy="304" r="30" fill="#14181f"/><circle cx="216" cy="304" r="13" fill="#8b95a3"/><circle cx="216" cy="304" r="5" fill="#d7dde6"/>
-        <circle cx="496" cy="304" r="30" fill="#14181f"/><circle cx="496" cy="304" r="13" fill="#8b95a3"/><circle cx="496" cy="304" r="5" fill="#d7dde6"/>
-        <g opacity=".35" transform="translate(0,660) scale(1,-1)">
-          <path d="M140 300 q4 -50 60 -62 q40 -46 120 -50 q95 -5 150 42 q14 12 22 14 q70 10 78 42 q6 22 -8 26 l-30 4 q-10 -34 -46 -34 q-36 0 -44 34 l-190 0 q-10 -34 -46 -34 q-36 0 -44 34 l-16 -2 q-10 -4 -6 -14 z" fill="#1f6f8b"/>
-        </g>
-      </g>
-      <text x="350" y="35" font-family="Arial" font-size="15" fill="#9fb2c0" text-anchor="middle" opacity=".9">samma foto, AI-förbättrad</text>
-    </svg>
-  </div>
-  <div class="bar" id="babar"></div>
-  <div class="knob" id="baknob">⇄</div>
-  <div class="balabel l"><span class="ar">قبل</span><span class="svt">Före</span></div>
-  <div class="balabel r"><span class="ar">بعد</span><span class="svt">Efter</span></div>
-</div>
-<p class="hint reveal">
-  <span class="ar">هذا رسم توضيحي للفكرة. مع سياراتك الحقيقية النتيجة أقوى بكثير، نجرب على سيارة من ساحتك في أول أسبوع.</span>
-  <span class="svt">Detta är en illustration av konceptet. Med dina riktiga bilar blir resultatet mycket starkare, vi testar på en bil från din gård första veckan.</span>
-</p>
-
-<!-- ============ 4. PACKAGES ============ -->
-<div class="sechead reveal"><span class="num">04</span> <span class="ar">الباقات</span><span class="svt">Paketen</span></div>
-<h2 class="reveal">
-  <span class="ar">ثلاث باقات. كلها تبدأ بالبناء مرة واحدة، ثم شهري.</span>
-  <span class="svt">Tre paket. Alla börjar med ett engångsbygge, sedan månadsvis.</span>
-</h2>
-
-<div class="plans reveal">
-  <div class="plan">
-    <div class="name">🥉 <span class="ar">الأساس</span><span class="svt">Grund</span></div>
-    <div class="tagline"><span class="ar">نبني كل شيء، وأنت تنشر بنفسك</span><span class="svt">Vi bygger allt, du postar själv</span></div>
-    <div class="price">
-      <div class="row"><span class="k"><span class="ar">البناء (مرة واحدة)</span><span class="svt">Bygge (engång)</span></span><span class="v">12 000 kr</span></div>
-      <div class="row"><span class="k"><span class="ar">شهرياً</span><span class="svt">Per månad</span></span><span class="v">2 000 kr<small>/mån</small></span></div>
+<!-- ============ USP ROW ============ -->
+<section class="usps">
+  <div class="wrap uspgrid">
+    <div class="usp">
+      <div class="uic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+      <h3 data-i18n="usp1_h">Egen verkstad</h3>
+      <p data-i18n="usp1_p">Service, reparation och däck görs på plats i Knalleland.</p>
     </div>
-    <ul class="feats">
-      <li><span class="ar">موقع مربوط بمخزون Blocket تلقائياً</span><span class="svt">Hemsida auto-synkad med Blocket-lagret</span></li>
-      <li><span class="ar">نظام الحجز</span><span class="svt">Bokningssystemet</span></li>
-      <li><span class="ar">ماكينة التقييمات</span><span class="svt">Omdömesmotorn</span></li>
-      <li><span class="ar">قوالب جاهزة للنشر</span><span class="svt">Färdiga inläggsmallar</span></li>
-    </ul>
-  </div>
-  <div class="plan feat">
-    <div class="ribbon"><span class="ar">الأنسب لك</span><span class="svt">Rekommenderas</span></div>
-    <div class="name">🥈 <span class="ar">مُدار</span><span class="svt">Skött</span></div>
-    <div class="tagline"><span class="ar">نحن نتولى كل شيء، أنت تبيع سيارات</span><span class="svt">Vi sköter allt, du säljer bilar</span></div>
-    <div class="price">
-      <div class="row"><span class="k"><span class="ar">البناء (مرة واحدة)</span><span class="svt">Bygge (engång)</span></span><span class="v">20 000 kr</span></div>
-      <div class="row"><span class="k"><span class="ar">شهرياً</span><span class="svt">Per månad</span></span><span class="v">6 500 kr<small>/mån</small></span></div>
+    <div class="usp">
+      <div class="uic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <h3 data-i18n="usp2_h">Garanti på arbetet</h3>
+      <p data-i18n="usp2_p">Alla verkstadsjobb lämnas med garanti.</p>
     </div>
-    <ul class="feats">
-      <li><span class="ar">كل ما في الأساس</span><span class="svt">Allt i Grund</span></li>
-      <li><span class="ar">8–12 منشور شهرياً، منفذ بالكامل (TikTok، إنستغرام، فيسبوك)</span><span class="svt">8–12 inlägg/mån, helt skött (TikTok, IG, FB)</span></li>
-      <li><span class="ar">تحسين صور كل سيارة جديدة بالذكاء الاصطناعي</span><span class="svt">AI-förbättrade bilder på varje ny bil</span></li>
-      <li><span class="ar">نرد على تقييمات Google باسمك</span><span class="svt">Vi svarar på Google-omdömen åt dig</span></li>
-      <li><span class="ar">شريك دائم، رقم واحد تتصل به</span><span class="svt">En fast partner, ett nummer att ringa</span></li>
-    </ul>
-  </div>
-  <div class="plan">
-    <div class="name">🥇 <span class="ar">الكامل</span><span class="svt">Full</span></div>
-    <div class="tagline"><span class="ar">مُدار + فيديو وإعلانات مدفوعة</span><span class="svt">Skött + film och annonser</span></div>
-    <div class="price">
-      <div class="row"><span class="k"><span class="ar">البناء (مرة واحدة)</span><span class="svt">Bygge (engång)</span></span><span class="v">30 000 kr</span></div>
-      <div class="row"><span class="k"><span class="ar">شهرياً</span><span class="svt">Per månad</span></span><span class="v">9 000 kr<small>/mån</small></span></div>
+    <div class="usp">
+      <div class="uic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+      <h3 data-i18n="usp3_h">Finansiering</h3>
+      <p data-i18n="usp3_p">Delbetalning på både bilköp och verkstadsjobb.</p>
     </div>
-    <ul class="feats">
-      <li><span class="ar">كل ما في مُدار</span><span class="svt">Allt i Skött</span></li>
-      <li><span class="ar">فيديو احترافي شهري</span><span class="svt">Professionell film varje månad</span></li>
-      <li><span class="ar">إعلانات مدفوعة مُدارة</span><span class="svt">Skötta betalannonser</span></li>
-      <li><span class="ar">بحث برقم اللوحة على الموقع</span><span class="svt">Regnr-sök på hemsidan</span></li>
-    </ul>
+    <div class="usp">
+      <div class="uic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+      <h3 data-i18n="usp4_h">Svenska och arabiska</h3>
+      <p data-i18n="usp4_p">Ring, skriv på WhatsApp eller kom förbi.</p>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="roi reveal">
-  <span class="ar"><b>حساب بسيط:</b> سيارة واحدة إضافية تنباع في الشهر تغطي تكلفة كل هذا النظام. والحجوزات التي لا تضيع لأن التلفون كان مشغول، هي ربح فوق ذلك.</span>
-  <span class="svt"><b>Enkel matematik:</b> en extra såld bil i månaden täcker hela systemet. Bokningarna som inte försvinner för att telefonen var upptagen är ren vinst ovanpå.</span>
-</div>
-<p class="fine">
-  <span class="ar">الأسعار بدون ضريبة (ex. moms). رخص الأدوات (BokaMera وغيرها) تُدفع مباشرة منكم. البناء يُدفع مقدماً.</span>
-  <span class="svt">Priser ex. moms. Verktygslicenser (BokaMera m.fl.) betalas direkt av er. Bygget faktureras i förskott.</span>
-</p>
+<!-- ============ WORKSHOP SERVICES ============ -->
+<section id="verkstad">
+  <div class="wrap">
+    <p class="kicker" data-i18n="ws_kicker">Verkstad</p>
+    <h2 data-i18n="ws_h2">Fast pris innan jobbet börjar</h2>
+    <p class="subline" data-i18n="ws_sub">Du får alltid ett pris innan vi sätter igång. Priserna nedan är exempel för demosajten.</p>
 
-<!-- ============ CTA ============ -->
-<div class="cta reveal">
-  <h2><span class="ar">الخطوة التالية</span><span class="svt">Nästa steg</span></h2>
-  <p>
-    <span class="ar">رد على رسالتي في واتساب وقل لي أي باقة تناسبكم، أو خبرني إذا تريد أن نراجعها مع نبز. نقدر نبدأ هذا الأسبوع.</span>
-    <span class="svt">Svara på mitt meddelande i WhatsApp och säg vilket paket som passar er, eller om du vill gå igenom det med Nabaz. Vi kan börja redan denna vecka.</span>
-  </p>
-</div>
+    <div class="svcgrid">
+      <div class="svc">
+        <div class="sic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+        <h3 data-i18n="svc1_h">Service</h3>
+        <p data-i18n="svc1_p">Olja, filter och genomgång enligt serviceprotokoll. Serviceboken stämplas digitalt.</p>
+        <div class="price"><span data-i18n="from">fr.</span> 1 795 kr</div>
+        <a href="#boka" data-i18n="svc_book">Boka tid</a>
+      </div>
+      <div class="svc">
+        <div class="sic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><line x1="12" y1="3" x2="12" y2="8.5"/><line x1="12" y1="15.5" x2="12" y2="21"/><line x1="3" y1="12" x2="8.5" y2="12"/><line x1="15.5" y1="12" x2="21" y2="12"/></svg></div>
+        <h3 data-i18n="svc2_h">Däckbyte</h3>
+        <p data-i18n="svc2_p">Hjulskifte, balansering och kontroll av mönsterdjup. Däckhotell finns.</p>
+        <div class="price"><span data-i18n="from">fr.</span> 350 kr</div>
+        <a href="#boka" data-i18n="svc_book">Boka tid</a>
+      </div>
+      <div class="svc">
+        <div class="sic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+        <h3 data-i18n="svc3_h">Reparation</h3>
+        <p data-i18n="svc3_p">Bromsar, koppling, avgassystem och annat slitage. Fast pris efter felsökning.</p>
+        <div class="price" data-i18n="svc3_price">Pris innan jobbet</div>
+        <a href="#boka" data-i18n="svc_book">Boka tid</a>
+      </div>
+      <div class="svc">
+        <div class="sic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3 data-i18n="svc4_h">Felsökning</h3>
+        <p data-i18n="svc4_p">Diagnos med dator, felkoder och åtgärdsförslag med pris.</p>
+        <div class="price"><span data-i18n="from">fr.</span> 495 kr</div>
+        <a href="#boka" data-i18n="svc_book">Boka tid</a>
+      </div>
+    </div>
+
+    <div class="trio">
+      <div class="tcard">
+        <div class="tnum" data-i18n="trio1_k">Garanti</div>
+        <h3 data-i18n="trio1_h">Garanti på alla verkstadsjobb</h3>
+        <p data-i18n="trio1_p">Blir det inte rätt gör vi om det utan kostnad. Garantivillkoren får du skriftligt vid bokningen.</p>
+      </div>
+      <div class="tcard">
+        <div class="tnum" data-i18n="trio2_k">Genomgångna bilar</div>
+        <h3 data-i18n="trio2_h">Testade i egen verkstad</h3>
+        <p data-i18n="trio2_p">Varje bil vi säljer är genomgången och servad av oss innan den ställs ut.</p>
+      </div>
+      <div class="tcard">
+        <div class="tnum" data-i18n="trio3_k">Finansiering</div>
+        <h3 data-i18n="trio3_h">Delbetalning som passar dig</h3>
+        <p data-i18n="trio3_p">Vi hjälper dig lägga upp finansiering på plats. Ta med legitimation så räknar vi på det.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CARS ============ -->
+<section class="cars" id="bilar">
+  <div class="wrap">
+    <div class="carhead">
+      <div>
+        <p class="kicker" data-i18n="cars_kicker">Bilar i lager</p>
+        <h2 data-i18n="cars_h2">Senast inkomna bilar</h2>
+        <p class="subline" data-i18n="cars_sub">Alla bilar är genomgångna i vår verkstad. Bilarna nedan är exempeldata för demosajten.</p>
+      </div>
+    </div>
+
+    <div class="filter" id="filter">
+      <button type="button" class="chip on" data-cat="all" data-i18n="cat_all">Alla</button>
+      <button type="button" class="chip" data-cat="suv" data-i18n="cat_suv">SUV</button>
+      <button type="button" class="chip" data-cat="kombi" data-i18n="cat_kombi">Kombi</button>
+      <button type="button" class="chip" data-cat="liten" data-i18n="cat_small">Småbil</button>
+    </div>
+
+    <div class="cargrid" id="cargrid">
+
+      <article class="car" data-cat="suv">
+        <div class="carimgbox">
+          <div class="carph" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span data-i18n="photo_coming">Foto kommer</span></div>
+          <span class="badge" data-i18n="badge_oneowner">En ägare</span>
+        </div>
+        <div class="carbody">
+          <h3>Volvo XC60</h3>
+          <p class="trim">D4 AWD Momentum</p>
+          <div class="specs">
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>2019</span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 12l4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="car1_mil">8 420 mil</span></span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><line x1="6" y1="8.5" x2="6" y2="15.5"/><line x1="18" y1="8.5" x2="18" y2="12"/><path d="M6 12h12"/></svg><span data-i18n="gb_auto">Automat</span></span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 22V4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0v-6l-3-3"/><line x1="3" y1="22" x2="16" y2="22"/></svg><span data-i18n="fuel_diesel">Diesel</span></span>
+          </div>
+          <div class="carfoot">
+            <div class="carprice"><div class="p">289 000 kr</div><div class="moms" data-i18n="inkl_moms">inkl. moms</div></div>
+            <a href="tel:+4633123456" data-i18n="car_cta">Boka provkörning</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="car" data-cat="kombi">
+        <div class="carimgbox">
+          <div class="carph" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span data-i18n="photo_coming">Foto kommer</span></div>
+          <span class="badge" data-i18n="badge_serviced">Nyservad</span>
+        </div>
+        <div class="carbody">
+          <h3>Volvo V60</h3>
+          <p class="trim">T4 Inscription</p>
+          <div class="specs">
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>2020</span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 12l4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="car2_mil">6 130 mil</span></span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><line x1="6" y1="8.5" x2="6" y2="15.5"/><line x1="18" y1="8.5" x2="18" y2="12"/><path d="M6 12h12"/></svg><span data-i18n="gb_auto">Automat</span></span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 22V4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0v-6l-3-3"/><line x1="3" y1="22" x2="16" y2="22"/></svg><span data-i18n="fuel_petrol">Bensin</span></span>
+          </div>
+          <div class="carfoot">
+            <div class="carprice"><div class="p">259 000 kr</div><div class="moms" data-i18n="inkl_moms">inkl. moms</div></div>
+            <a href="tel:+4633123456" data-i18n="car_cta">Boka provkörning</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="car" data-cat="suv">
+        <div class="carimgbox">
+          <div class="carph" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span data-i18n="photo_coming">Foto kommer</span></div>
+          <span class="badge" data-i18n="badge_inspected">Nybesiktigad</span>
+        </div>
+        <div class="carbody">
+          <h3>Toyota RAV4</h3>
+          <p class="trim">Hybrid AWD Active</p>
+          <div class="specs">
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>2021</span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 12l4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="car3_mil">4 890 mil</span></span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><line x1="6" y1="8.5" x2="6" y2="15.5"/><line x1="18" y1="8.5" x2="18" y2="12"/><path d="M6 12h12"/></svg><span data-i18n="gb_auto">Automat</span></span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 22V4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0v-6l-3-3"/><line x1="3" y1="22" x2="16" y2="22"/></svg><span data-i18n="fuel_hybrid">Hybrid</span></span>
+          </div>
+          <div class="carfoot">
+            <div class="carprice"><div class="p">319 000 kr</div><div class="moms" data-i18n="inkl_moms">inkl. moms</div></div>
+            <a href="tel:+4633123456" data-i18n="car_cta">Boka provkörning</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="car" data-cat="liten">
+        <div class="carimgbox">
+          <div class="carph" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span data-i18n="photo_coming">Foto kommer</span></div>
+        </div>
+        <div class="carbody">
+          <h3>Volkswagen Golf</h3>
+          <p class="trim">1.5 TSI Style</p>
+          <div class="specs">
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>2020</span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 12l4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="car4_mil">5 540 mil</span></span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><line x1="6" y1="8.5" x2="6" y2="15.5"/><line x1="18" y1="8.5" x2="18" y2="12"/><path d="M6 12h12"/></svg><span data-i18n="gb_manual">Manuell</span></span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 22V4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0v-6l-3-3"/><line x1="3" y1="22" x2="16" y2="22"/></svg><span data-i18n="fuel_petrol">Bensin</span></span>
+          </div>
+          <div class="carfoot">
+            <div class="carprice"><div class="p">179 000 kr</div><div class="moms" data-i18n="inkl_moms">inkl. moms</div></div>
+            <a href="tel:+4633123456" data-i18n="car_cta">Boka provkörning</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="car" data-cat="kombi">
+        <div class="carimgbox">
+          <div class="carph" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span data-i18n="photo_coming">Foto kommer</span></div>
+          <span class="badge" data-i18n="badge_tow">Dragkrok</span>
+        </div>
+        <div class="carbody">
+          <h3>Skoda Octavia</h3>
+          <p class="trim">Combi 2.0 TDI Style</p>
+          <div class="specs">
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>2019</span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 12l4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="car5_mil">9 210 mil</span></span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><line x1="6" y1="8.5" x2="6" y2="15.5"/><line x1="18" y1="8.5" x2="18" y2="12"/><path d="M6 12h12"/></svg><span data-i18n="gb_auto">Automat</span></span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 22V4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0v-6l-3-3"/><line x1="3" y1="22" x2="16" y2="22"/></svg><span data-i18n="fuel_diesel">Diesel</span></span>
+          </div>
+          <div class="carfoot">
+            <div class="carprice"><div class="p">159 000 kr</div><div class="moms" data-i18n="inkl_moms">inkl. moms</div></div>
+            <a href="tel:+4633123456" data-i18n="car_cta">Boka provkörning</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="car" data-cat="kombi">
+        <div class="carimgbox">
+          <div class="carph" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span data-i18n="photo_coming">Foto kommer</span></div>
+          <span class="badge" data-i18n="badge_oneowner">En ägare</span>
+        </div>
+        <div class="carbody">
+          <h3>Kia Ceed SW</h3>
+          <p class="trim">Plug-in Hybrid Advance</p>
+          <div class="specs">
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>2021</span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 12l4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="car6_mil">3 780 mil</span></span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><line x1="6" y1="8.5" x2="6" y2="15.5"/><line x1="18" y1="8.5" x2="18" y2="12"/><path d="M6 12h12"/></svg><span data-i18n="gb_auto">Automat</span></span>
+            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 22V4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0v-6l-3-3"/><line x1="3" y1="22" x2="16" y2="22"/></svg><span data-i18n="fuel_phev">Laddhybrid</span></span>
+          </div>
+          <div class="carfoot">
+            <div class="carprice"><div class="p">229 000 kr</div><div class="moms" data-i18n="inkl_moms">inkl. moms</div></div>
+            <a href="tel:+4633123456" data-i18n="car_cta">Boka provkörning</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section id="omdomen">
+  <div class="wrap">
+    <p class="kicker" data-i18n="rev_kicker">Omdömen</p>
+    <h2 data-i18n="rev_h2">Vad kunderna säger</h2>
+    <div class="ratline">
+      <span class="stars" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg></span>
+      <b data-i18n="rev_score_ph">X,X</b>
+      <span data-i18n="rev_meta">Riktiga Google-omdömen visas här</span>
+      <span class="demotag" data-i18n="rev_ph_tag">Platshållare</span>
+    </div>
+
+    <div class="revgrid">
+      <div class="rev">
+        <span class="demotag" data-i18n="rev_ex_tag">Exempelomdöme</span>
+        <div class="rstars" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg></div>
+        <p data-i18n="rev1_p">Bokade däckbyte på nätet och bilen var klar innan lunch. Tydligt pris innan jobbet startade.</p>
+        <div class="who" data-i18n="rev1_who">Verkstadskund</div>
+      </div>
+      <div class="rev">
+        <span class="demotag" data-i18n="rev_ex_tag">Exempelomdöme</span>
+        <div class="rstars" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg></div>
+        <p data-i18n="rev2_p">Köpte en kombi i våras. Bilen var nyservad och genomgången i deras egen verkstad innan leverans.</p>
+        <div class="who" data-i18n="rev2_who">Bilköpare</div>
+      </div>
+      <div class="rev">
+        <span class="demotag" data-i18n="rev_ex_tag">Exempelomdöme</span>
+        <div class="rstars" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg></div>
+        <p data-i18n="rev3_p">Skrev på WhatsApp på kvällen och fick svar direkt på morgonen, med en tid samma vecka.</p>
+        <div class="who" data-i18n="rev3_who">Verkstadskund</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISIT ============ -->
+<section id="hitta" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="kicker" data-i18n="visit_kicker">Hitta hit</p>
+    <h2 data-i18n="visit_h2">Mitt i Knalleland, Borås</h2>
+
+    <div class="visitgrid">
+      <div class="hours">
+        <div class="hrowl"><span data-i18n="h_monfri">Måndag till fredag</span><b>09:00–18:00</b></div>
+        <div class="hrowl"><span data-i18n="h_sat">Lördag</span><b>10:00–14:00</b></div>
+        <div class="hrowl"><span data-i18n="h_sun">Söndag</span><b data-i18n="h_closed">Stängt</b></div>
+      </div>
+      <div class="visitinfo">
+        <div class="vl" data-i18n="v_addr_l">Adress</div>
+        <p data-i18n="v_addr">Knallelandsområdet, Borås (exempeladress)</p>
+        <div class="vl" data-i18n="v_contact_l">Kontakt</div>
+        <p><span dir="ltr">033-123 45 67</span> · info@knallelandsbilcenter.se</p>
+        <div class="vl" data-i18n="v_org_l">Organisationsnummer</div>
+        <p data-i18n="v_org">55XXXX-XXXX (exempel)</p>
+        <div class="visitctas">
+          <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Knalleland%2C+Bor%C3%A5s" target="_blank" rel="noopener" data-i18n="v_directions">Vägbeskrivning</a>
+          <a class="btn primary" href="tel:+4633123456"><span data-i18n="v_call_label">Ring</span><span dir="ltr">033-123 45 67</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
 
 <footer>
-  <div><b>Ikapp</b> · Jönköping</div>
-  <div>jude@ikapp.ai · @joudgor · powered by Ikapp.ai</div>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="fb">Knallelands Bilcenter</div>
+        <p data-i18n="f_tag">Verkstad och bilhandel i Borås</p>
+      </div>
+      <div>
+        <p><span dir="ltr">033-123 45 67</span><br>info@knallelandsbilcenter.se</p>
+      </div>
+    </div>
+    <div class="demoline">
+      <span data-i18n="f_demo">Demosajt byggd av Ikapp med exempeldata. Bilar, priser, omdömen, öppettider, telefonnummer samt garanti- och finansieringsvillkor är exempel.</span>
+      <a href="https://ikapp.ai" target="_blank" rel="noopener">ikapp.ai</a>
+    </div>
+  </div>
 </footer>
 
+<div class="mbar">
+  <a href="tel:+4633123456">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    <span data-i18n="m_call">Ring oss</span>
+  </a>
+  <a class="wa" href="https://wa.me/46701234567" target="_blank" rel="noopener">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2a9.9 9.9 0 0 0-8.4 15.1L2 22l5-1.6A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.1 15.1l-.3-.18-3 .95.97-2.9-.2-.3A8.1 8.1 0 0 1 12.04 3.8zm-3.3 3.9c-.18 0-.47.07-.72.34-.24.27-.94.92-.94 2.24 0 1.32.96 2.6 1.1 2.78.13.18 1.87 2.98 4.62 4.06 2.29.9 2.75.72 3.25.68.5-.05 1.6-.66 1.83-1.29.23-.63.23-1.17.16-1.29-.07-.11-.25-.18-.52-.32-.27-.13-1.6-.79-1.85-.88-.25-.09-.43-.13-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.72-1.34-1.6-1.5-1.87-.16-.27-.02-.42.12-.55.12-.12.27-.32.4-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.13-.6-1.45-.83-1.98-.2-.47-.4-.42-.56-.43z"/></svg>
+    WhatsApp
+  </a>
 </div>
+
 <script>
-// language toggle
-function toggleLang(){
-  var sv = document.body.classList.toggle('sv');
-  document.documentElement.setAttribute('dir', sv ? 'ltr' : 'rtl');
-  document.documentElement.setAttribute('lang', sv ? 'sv' : 'ar');
-  document.getElementById('langbtn').textContent = sv ? 'عربي' : 'Svenska';
-}
-if(location.search.indexOf('sv')>-1||location.hash==='#sv')toggleLang();
-// booking demo
-var svc=null, slot=null;
-document.querySelectorAll('#svc .chip').forEach(function(b){
-  b.onclick=function(){document.querySelectorAll('#svc .chip').forEach(function(x){x.classList.remove('on')});
-    b.classList.add('on');svc=b.dataset.v;check();};
-});
-document.querySelectorAll('#slots .slot').forEach(function(b){
-  b.onclick=function(){document.querySelectorAll('#slots .slot').forEach(function(x){x.classList.remove('on')});
-    b.classList.add('on');slot=b.dataset.v;check();};
-});
-document.getElementById('reg').addEventListener('input',check);
-function check(){
-  var reg=document.getElementById('reg').value.trim();
-  document.getElementById('bookbtn').disabled=!(svc&&slot&&reg.length>=5);
-}
-function book(){
-  var reg=document.getElementById('reg').value.trim().toUpperCase();
-  var sv=document.body.classList.contains('sv');
-  var box=document.getElementById('smsbox'), bub=document.getElementById('smsbubble');
-  box.classList.remove('hidden');
-  bub.textContent='';bub.classList.remove('show');
-  var msg=sv
-    ? 'Ny bokning ✓\n'+reg+' · '+svc+'\n'+slot+'\nKund: 070-XXX XX XX'
-    : 'حجز جديد ✓\n'+reg+' · '+svc+'\n'+slot+'\nالزبون: 070-XXX XX XX';
-  setTimeout(function(){bub.textContent=msg;bub.classList.add('show');
-    box.scrollIntoView({behavior:'smooth',block:'nearest'});},350);
-}
-// review demo
-function review(){
-  var sv=document.body.classList.contains('sv');
-  var sms=document.getElementById('revsms'), bub=document.getElementById('revbubble');
-  var card=document.getElementById('gcard'), nr=document.getElementById('newrev');
-  var hint=document.getElementById('revhint');
-  document.getElementById('revbtn').disabled=true;
-  sms.classList.remove('hidden');
-  var msg=sv
-    ? 'Hej! Tack för att du valde Knallelands Bilcenter. Blev du nöjd? Lämna gärna ett omdöme, det betyder mycket för oss: g.page/r/…'
-    : 'Hej! Tack för att du valde Knallelands Bilcenter. Blev du nöjd? Lämna gärna ett omdöme, det betyder mycket för oss: g.page/r/…';
-  setTimeout(function(){bub.textContent=msg;bub.classList.add('show');},350);
-  setTimeout(function(){card.classList.remove('hidden');},1500);
-  setTimeout(function(){nr.classList.add('show');
-    document.getElementById('gstars').textContent='★★★★★';
-    document.getElementById('gmeta').textContent='4,1 · 33 recensioner';
-    hint.classList.remove('hidden');
-    card.scrollIntoView({behavior:'smooth',block:'nearest'});},2400);
-}
-// before/after slider
 (function(){
-  var ba=document.getElementById('ba'), after=ba.querySelector('.after');
-  var bar=document.getElementById('babar'), knob=document.getElementById('baknob');
-  function set(x){
-    var r=ba.getBoundingClientRect();
-    var p=Math.max(4,Math.min(96,(x-r.left)/r.width*100));
-    after.style.clipPath='inset(0 0 0 '+p+'%)';
-    bar.style.left=p+'%';knob.style.left=p+'%';
+  'use strict';
+
+  /* ---------------- i18n ---------------- */
+  var I18N = {
+    sv: {
+      _title: 'Knallelands Bilcenter · Verkstad och bilar i Borås',
+      brand_sub: 'Bilcenter · Borås',
+      nav_workshop: 'Verkstad', nav_cars: 'Bilar i lager', nav_reviews: 'Omdömen', nav_visit: 'Hitta hit',
+      hero_kicker: 'Bilverkstad och bilhandel i Borås',
+      hero_h1: 'Boka verkstadstid på två minuter. Utan telefonkö.',
+      hero_lead: 'Service, reparation och däck i vår egen verkstad i Knalleland. Välj ärende, ange registreringsnummer och önskad tid. Vi bekräftar samma dag.',
+      hero_cta_book: 'Boka verkstadstid', hero_cta_wa: 'Skriv på WhatsApp',
+      hero_note1: 'Svar samma dag.', hero_note2: 'Vi talar svenska och arabiska.',
+      book_title: 'Boka verkstadstid', book_demo_tag: 'Demo',
+      book_l_service: 'Ärende', book_l_reg: 'Registreringsnummer',
+      book_l_name: 'Namn', book_l_phone: 'Telefon', book_l_time: 'Önskad tid',
+      book_ph_name: 'Ditt namn',
+      svc_service: 'Service', svc_tires: 'Däckbyte', svc_repair: 'Reparation', svc_diag: 'Felsökning',
+      slot1: 'Mån 08:30', slot2: 'Mån 13:00', slot3: 'Tis 09:00',
+      slot4: 'Tis 15:30', slot5: 'Ons 08:30', slot6: 'Ons 11:00',
+      book_send: 'Skicka bokningsförfrågan',
+      book_fine: 'Demoformulär. Ingen bokning skickas.',
+      book_c_line: 'Tack. Vi bekräftar din tid via telefon eller SMS.',
+      usp1_h: 'Egen verkstad', usp1_p: 'Service, reparation och däck görs på plats i Knalleland.',
+      usp2_h: 'Garanti på arbetet', usp2_p: 'Alla verkstadsjobb lämnas med garanti.',
+      usp3_h: 'Finansiering', usp3_p: 'Delbetalning på både bilköp och verkstadsjobb.',
+      usp4_h: 'Svenska och arabiska', usp4_p: 'Ring, skriv på WhatsApp eller kom förbi.',
+      ws_kicker: 'Verkstad', ws_h2: 'Fast pris innan jobbet börjar',
+      ws_sub: 'Du får alltid ett pris innan vi sätter igång. Priserna nedan är exempel för demosajten.',
+      from: 'fr.', svc_book: 'Boka tid',
+      svc1_h: 'Service', svc1_p: 'Olja, filter och genomgång enligt serviceprotokoll. Serviceboken stämplas digitalt.',
+      svc2_h: 'Däckbyte', svc2_p: 'Hjulskifte, balansering och kontroll av mönsterdjup. Däckhotell finns.',
+      svc3_h: 'Reparation', svc3_p: 'Bromsar, koppling, avgassystem och annat slitage. Fast pris efter felsökning.',
+      svc3_price: 'Pris innan jobbet',
+      svc4_h: 'Felsökning', svc4_p: 'Diagnos med dator, felkoder och åtgärdsförslag med pris.',
+      trio1_k: 'Garanti', trio1_h: 'Garanti på alla verkstadsjobb',
+      trio1_p: 'Blir det inte rätt gör vi om det utan kostnad. Garantivillkoren får du skriftligt vid bokningen.',
+      trio2_k: 'Genomgångna bilar', trio2_h: 'Testade i egen verkstad',
+      trio2_p: 'Varje bil vi säljer är genomgången och servad av oss innan den ställs ut.',
+      trio3_k: 'Finansiering', trio3_h: 'Delbetalning som passar dig',
+      trio3_p: 'Vi hjälper dig lägga upp finansiering på plats. Ta med legitimation så räknar vi på det.',
+      cars_kicker: 'Bilar i lager', cars_h2: 'Senast inkomna bilar',
+      cars_sub: 'Alla bilar är genomgångna i vår verkstad. Bilarna nedan är exempeldata för demosajten.',
+      cat_all: 'Alla', cat_suv: 'SUV', cat_kombi: 'Kombi', cat_small: 'Småbil',
+      photo_coming: 'Foto kommer',
+      badge_oneowner: 'En ägare', badge_serviced: 'Nyservad', badge_inspected: 'Nybesiktigad', badge_tow: 'Dragkrok',
+      car1_mil: '8 420 mil', car2_mil: '6 130 mil', car3_mil: '4 890 mil',
+      car4_mil: '5 540 mil', car5_mil: '9 210 mil', car6_mil: '3 780 mil',
+      gb_auto: 'Automat', gb_manual: 'Manuell',
+      fuel_diesel: 'Diesel', fuel_petrol: 'Bensin', fuel_hybrid: 'Hybrid', fuel_phev: 'Laddhybrid',
+      inkl_moms: 'inkl. moms', car_cta: 'Boka provkörning',
+      rev_kicker: 'Omdömen', rev_h2: 'Vad kunderna säger',
+      rev_score_ph: 'X,X',
+      rev_meta: 'Riktiga Google-omdömen visas här',
+      rev_ph_tag: 'Platshållare',
+      rev_ex_tag: 'Exempelomdöme',
+      rev1_p: 'Bokade däckbyte på nätet och bilen var klar innan lunch. Tydligt pris innan jobbet startade.',
+      rev1_who: 'Verkstadskund',
+      rev2_p: 'Köpte en kombi i våras. Bilen var nyservad och genomgången i deras egen verkstad innan leverans.',
+      rev2_who: 'Bilköpare',
+      rev3_p: 'Skrev på WhatsApp på kvällen och fick svar direkt på morgonen, med en tid samma vecka.',
+      rev3_who: 'Verkstadskund',
+      visit_kicker: 'Hitta hit', visit_h2: 'Mitt i Knalleland, Borås',
+      h_monfri: 'Måndag till fredag', h_sat: 'Lördag', h_sun: 'Söndag', h_closed: 'Stängt',
+      v_addr_l: 'Adress', v_addr: 'Knallelandsområdet, Borås (exempeladress)',
+      v_contact_l: 'Kontakt', v_org_l: 'Organisationsnummer', v_org: '55XXXX-XXXX (exempel)',
+      v_directions: 'Vägbeskrivning', v_call_label: 'Ring',
+      f_tag: 'Verkstad och bilhandel i Borås',
+      f_demo: 'Demosajt byggd av Ikapp med exempeldata. Bilar, priser, omdömen, öppettider, telefonnummer samt garanti- och finansieringsvillkor är exempel.',
+      m_call: 'Ring oss',
+      lang_label: 'Språk',
+      demo_num_title: 'Exempelnummer',
+      demo_num_toast: 'Exempelnummer. Riktigt nummer kopplas in här.'
+    },
+    en: {
+      _title: 'Knallelands Bilcenter · Workshop and cars in Borås',
+      brand_sub: 'Bilcenter · Borås',
+      nav_workshop: 'Workshop', nav_cars: 'Cars in stock', nav_reviews: 'Reviews', nav_visit: 'Find us',
+      hero_kicker: 'Car workshop and dealership in Borås',
+      hero_h1: 'Book a workshop slot in two minutes. No phone queue.',
+      hero_lead: 'Servicing, repairs and tyres in our own workshop in Knalleland. Pick a service, enter your registration number and a preferred time. We confirm the same day.',
+      hero_cta_book: 'Book a workshop slot', hero_cta_wa: 'Message us on WhatsApp',
+      hero_note1: 'Reply the same day.', hero_note2: 'We speak Swedish and Arabic.',
+      book_title: 'Book a workshop slot', book_demo_tag: 'Demo',
+      book_l_service: 'Service type', book_l_reg: 'Registration number',
+      book_l_name: 'Name', book_l_phone: 'Phone', book_l_time: 'Preferred time',
+      book_ph_name: 'Your name',
+      svc_service: 'Servicing', svc_tires: 'Tyre change', svc_repair: 'Repair', svc_diag: 'Diagnostics',
+      slot1: 'Mon 08:30', slot2: 'Mon 13:00', slot3: 'Tue 09:00',
+      slot4: 'Tue 15:30', slot5: 'Wed 08:30', slot6: 'Wed 11:00',
+      book_send: 'Send booking request',
+      book_fine: 'Demo form. No booking is sent.',
+      book_c_line: 'Thank you. We will confirm your time by phone or text.',
+      usp1_h: 'Our own workshop', usp1_p: 'Servicing, repairs and tyres done on site in Knalleland.',
+      usp2_h: 'Warranty on all work', usp2_p: 'Every workshop job comes with a warranty.',
+      usp3_h: 'Financing', usp3_p: 'Instalment plans for both car purchases and workshop jobs.',
+      usp4_h: 'Swedish and Arabic', usp4_p: 'Call, message us on WhatsApp or drop by.',
+      ws_kicker: 'Workshop', ws_h2: 'A fixed price before the work starts',
+      ws_sub: 'You always get a price before we begin. The prices below are examples for this demo site.',
+      from: 'from', svc_book: 'Book a slot',
+      svc1_h: 'Servicing', svc1_p: 'Oil, filters and a full check according to the service schedule. The service record is stamped digitally.',
+      svc2_h: 'Tyre change', svc2_p: 'Wheel change, balancing and tread depth check. Tyre storage available.',
+      svc3_h: 'Repairs', svc3_p: 'Brakes, clutch, exhaust and other wear. Fixed price after diagnostics.',
+      svc3_price: 'Price before the job',
+      svc4_h: 'Diagnostics', svc4_p: 'Computer diagnostics, fault codes and a repair proposal with a price.',
+      trio1_k: 'Warranty', trio1_h: 'Warranty on all workshop jobs',
+      trio1_p: 'If it is not right, we redo it at no cost. You get the warranty terms in writing when you book.',
+      trio2_k: 'Inspected cars', trio2_h: 'Tested in our own workshop',
+      trio2_p: 'Every car we sell is inspected and serviced by us before it goes on display.',
+      trio3_k: 'Financing', trio3_h: 'Instalments that fit you',
+      trio3_p: 'We help you set up financing on site. Bring your ID and we will run the numbers.',
+      cars_kicker: 'Cars in stock', cars_h2: 'Latest arrivals',
+      cars_sub: 'Every car is inspected in our workshop. The cars below are example data for this demo site.',
+      cat_all: 'All', cat_suv: 'SUV', cat_kombi: 'Estate', cat_small: 'Compact',
+      photo_coming: 'Photo coming',
+      badge_oneowner: 'One owner', badge_serviced: 'Just serviced', badge_inspected: 'New MOT', badge_tow: 'Tow bar',
+      car1_mil: '84,200 km', car2_mil: '61,300 km', car3_mil: '48,900 km',
+      car4_mil: '55,400 km', car5_mil: '92,100 km', car6_mil: '37,800 km',
+      gb_auto: 'Automatic', gb_manual: 'Manual',
+      fuel_diesel: 'Diesel', fuel_petrol: 'Petrol', fuel_hybrid: 'Hybrid', fuel_phev: 'Plug-in hybrid',
+      inkl_moms: 'incl. VAT', car_cta: 'Book a test drive',
+      rev_kicker: 'Reviews', rev_h2: 'What customers say',
+      rev_score_ph: 'X.X',
+      rev_meta: 'Real Google reviews appear here',
+      rev_ph_tag: 'Placeholder',
+      rev_ex_tag: 'Sample review',
+      rev1_p: 'Booked a tyre change online and the car was ready before lunch. Clear price before the work started.',
+      rev1_who: 'Workshop customer',
+      rev2_p: 'Bought an estate this spring. The car was freshly serviced and inspected in their own workshop before delivery.',
+      rev2_who: 'Car buyer',
+      rev3_p: 'Messaged them on WhatsApp in the evening and had a reply first thing in the morning, with a slot the same week.',
+      rev3_who: 'Workshop customer',
+      visit_kicker: 'Find us', visit_h2: 'In the middle of Knalleland, Borås',
+      h_monfri: 'Monday to Friday', h_sat: 'Saturday', h_sun: 'Sunday', h_closed: 'Closed',
+      v_addr_l: 'Address', v_addr: 'Knalleland area, Borås (example address)',
+      v_contact_l: 'Contact', v_org_l: 'Company reg. no.', v_org: '55XXXX-XXXX (example)',
+      v_directions: 'Directions', v_call_label: 'Call',
+      f_tag: 'Workshop and dealership in Borås',
+      f_demo: 'Demo site built by Ikapp with example data. Cars, prices, reviews, opening hours, phone numbers, warranty and financing terms are examples.',
+      m_call: 'Call us',
+      lang_label: 'Language',
+      demo_num_title: 'Example number',
+      demo_num_toast: 'Example number. The real number goes here.'
+    },
+    ar: {
+      _title: 'مركز كنالِلاند للسيارات · ورشة وسيارات في بوروس',
+      brand_sub: 'مركز سيارات · بوروس',
+      nav_workshop: 'الورشة', nav_cars: 'السيارات المتوفرة', nav_reviews: 'التقييمات', nav_visit: 'موقعنا',
+      hero_kicker: 'ورشة سيارات ومعرض في بوروس',
+      hero_h1: 'احجز موعد الورشة في دقيقتين. بدون انتظار على الهاتف.',
+      hero_lead: 'صيانة وتصليح وإطارات في ورشتنا الخاصة في كنالِلاند. اختر الخدمة، أدخل رقم اللوحة والوقت المناسب. نؤكد الحجز في نفس اليوم.',
+      hero_cta_book: 'احجز موعد الورشة', hero_cta_wa: 'راسلنا على واتساب',
+      hero_note1: 'نرد في نفس اليوم.', hero_note2: 'نتكلم السويدية والعربية.',
+      book_title: 'حجز موعد الورشة', book_demo_tag: 'تجريبي',
+      book_l_service: 'نوع الخدمة', book_l_reg: 'رقم اللوحة',
+      book_l_name: 'الاسم', book_l_phone: 'الهاتف', book_l_time: 'الوقت المناسب',
+      book_ph_name: 'اسمك',
+      svc_service: 'صيانة', svc_tires: 'تغيير إطارات', svc_repair: 'تصليح', svc_diag: 'فحص كمبيوتر',
+      slot1: 'الاثنين 08:30', slot2: 'الاثنين 13:00', slot3: 'الثلاثاء 09:00',
+      slot4: 'الثلاثاء 15:30', slot5: 'الأربعاء 08:30', slot6: 'الأربعاء 11:00',
+      book_send: 'أرسل طلب الحجز',
+      book_fine: 'نموذج تجريبي. لا يتم إرسال أي حجز.',
+      book_c_line: 'شكراً. سنؤكد موعدك عبر الهاتف أو رسالة نصية.',
+      usp1_h: 'ورشتنا الخاصة', usp1_p: 'الصيانة والتصليح والإطارات في مكان واحد في كنالِلاند.',
+      usp2_h: 'ضمان على العمل', usp2_p: 'كل أعمال الورشة مشمولة بالضمان.',
+      usp3_h: 'تمويل', usp3_p: 'تقسيط على شراء السيارات وأعمال الورشة.',
+      usp4_h: 'السويدية والعربية', usp4_p: 'اتصل أو راسلنا على واتساب أو تفضل بزيارتنا.',
+      ws_kicker: 'الورشة', ws_h2: 'سعر ثابت قبل بدء العمل',
+      ws_sub: 'تحصل دائماً على السعر قبل أن نبدأ. الأسعار أدناه أمثلة لموقع تجريبي.',
+      from: 'من', svc_book: 'احجز موعداً',
+      svc1_h: 'صيانة', svc1_p: 'زيت وفلاتر وفحص شامل حسب دفتر الصيانة. يُختم دفتر الصيانة رقمياً.',
+      svc2_h: 'تغيير إطارات', svc2_p: 'تبديل العجلات وترصيص وفحص عمق النقشة. تخزين الإطارات متوفر.',
+      svc3_h: 'تصليح', svc3_p: 'فرامل وكلتش وشكمان وقطع الاستهلاك. سعر ثابت بعد الفحص.',
+      svc3_price: 'السعر قبل العمل',
+      svc4_h: 'فحص كمبيوتر', svc4_p: 'فحص بالكمبيوتر، قراءة الأعطال واقتراح التصليح مع السعر.',
+      trio1_k: 'الضمان', trio1_h: 'ضمان على كل أعمال الورشة',
+      trio1_p: 'إذا لم تكن النتيجة صحيحة نعيد العمل بدون تكلفة. تستلم شروط الضمان خطياً عند الحجز.',
+      trio2_k: 'سيارات مفحوصة', trio2_h: 'مفحوصة في ورشتنا',
+      trio2_p: 'كل سيارة نبيعها مفحوصة ومصانة عندنا قبل عرضها.',
+      trio3_k: 'التمويل', trio3_h: 'تقسيط يناسبك',
+      trio3_p: 'نساعدك بترتيب التمويل في المعرض. أحضر هويتك ونحسبها معك.',
+      cars_kicker: 'السيارات المتوفرة', cars_h2: 'أحدث السيارات الواصلة',
+      cars_sub: 'كل السيارات مفحوصة في ورشتنا. السيارات أدناه بيانات تجريبية لموقع تجريبي.',
+      cat_all: 'الكل', cat_suv: 'دفع رباعي', cat_kombi: 'عائلية', cat_small: 'صغيرة',
+      photo_coming: 'الصورة قريباً',
+      badge_oneowner: 'مالك واحد', badge_serviced: 'صيانة حديثة', badge_inspected: 'فحص جديد', badge_tow: 'وصلة سحب',
+      car1_mil: '84,200 كم', car2_mil: '61,300 كم', car3_mil: '48,900 كم',
+      car4_mil: '55,400 كم', car5_mil: '92,100 كم', car6_mil: '37,800 كم',
+      gb_auto: 'أوتوماتيك', gb_manual: 'عادي',
+      fuel_diesel: 'ديزل', fuel_petrol: 'بنزين', fuel_hybrid: 'هايبرد', fuel_phev: 'هايبرد بالشحن',
+      inkl_moms: 'شامل الضريبة', car_cta: 'احجز تجربة قيادة',
+      rev_kicker: 'التقييمات', rev_h2: 'ماذا يقول الزبائن',
+      rev_score_ph: 'X,X',
+      rev_meta: 'تقييمات Google الحقيقية تظهر هنا',
+      rev_ph_tag: 'نموذج مؤقت',
+      rev_ex_tag: 'تقييم تجريبي',
+      rev1_p: 'حجزت تغيير إطارات عبر الموقع وكانت السيارة جاهزة قبل الظهر. السعر كان واضحاً قبل بدء العمل.',
+      rev1_who: 'زبون ورشة',
+      rev2_p: 'اشتريت سيارة عائلية في الربيع. كانت مصانة ومفحوصة في ورشتهم قبل التسليم.',
+      rev2_who: 'مشتري سيارة',
+      rev3_p: 'راسلتهم على واتساب مساءً ووصلني الرد صباح اليوم التالي مع موعد في نفس الأسبوع.',
+      rev3_who: 'زبون ورشة',
+      visit_kicker: 'موقعنا', visit_h2: 'في وسط كنالِلاند، بوروس',
+      h_monfri: 'الاثنين إلى الجمعة', h_sat: 'السبت', h_sun: 'الأحد', h_closed: 'مغلق',
+      v_addr_l: 'العنوان', v_addr: 'منطقة كنالِلاند، بوروس (عنوان تجريبي)',
+      v_contact_l: 'التواصل', v_org_l: 'رقم السجل التجاري', v_org: '55XXXX-XXXX (مثال)',
+      v_directions: 'الاتجاهات', v_call_label: 'اتصل',
+      f_tag: 'ورشة ومعرض سيارات في بوروس',
+      f_demo: 'موقع تجريبي من إعداد Ikapp ببيانات تجريبية. السيارات والأسعار والتقييمات وأوقات الدوام وأرقام الهاتف وشروط الضمان والتمويل أمثلة.',
+      m_call: 'اتصل بنا',
+      lang_label: 'اللغة',
+      demo_num_title: 'رقم تجريبي',
+      demo_num_toast: 'رقم تجريبي. الرقم الحقيقي يوضع هنا.'
+    }
+  };
+
+  var LANGS = ['sv', 'en', 'ar'];
+  var cur = 'sv';
+
+  function applyI18n(lang) {
+    var dict = I18N[lang];
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var k = el.getAttribute('data-i18n');
+      if (dict[k] !== undefined) el.textContent = dict[k];
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function (el) {
+      var k = el.getAttribute('data-i18n-ph');
+      if (dict[k] !== undefined) el.setAttribute('placeholder', dict[k]);
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+      var k = el.getAttribute('data-i18n-aria');
+      if (dict[k] !== undefined) el.setAttribute('aria-label', dict[k]);
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach(function (el) {
+      var k = el.getAttribute('data-i18n-title');
+      if (dict[k] !== undefined) el.setAttribute('title', dict[k]);
+    });
+    document.title = dict._title;
   }
-  var drag=false;
-  ba.addEventListener('pointerdown',function(e){drag=true;set(e.clientX);ba.setPointerCapture(e.pointerId);});
-  ba.addEventListener('pointermove',function(e){if(drag)set(e.clientX);});
-  ba.addEventListener('pointerup',function(){drag=false;});
+
+  function setLang(lang, persist) {
+    if (LANGS.indexOf(lang) === -1) lang = 'sv';
+    cur = lang;
+    document.documentElement.setAttribute('lang', lang);
+    document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    applyI18n(lang);
+    document.querySelectorAll('.lang button').forEach(function (b) {
+      b.classList.toggle('on', b.getAttribute('data-lang') === lang);
+    });
+    if (persist !== false) {
+      try { localStorage.setItem('kbc_lang', lang); } catch (e) {}
+    }
+    renderConfirm();
+  }
+
+  document.querySelectorAll('.lang button').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.getAttribute('data-lang')); });
+  });
+
+  /* demo phone numbers: never place a real call or open a real chat */
+  var toast = document.createElement('div');
+  toast.className = 'toast';
+  document.body.appendChild(toast);
+  var toastTimer = null;
+  function showToast() {
+    toast.textContent = I18N[cur].demo_num_toast;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2600);
+  }
+  document.querySelectorAll('a[href^="tel:"], a[href*="wa.me"]').forEach(function (a) {
+    a.setAttribute('data-i18n-title', 'demo_num_title');
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      showToast();
+    });
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem('kbc_lang'); } catch (e) {}
+  /* legacy ?sv link: force Swedish on that visit, without overwriting the saved choice */
+  if (/[?&]sv(&|=|$)/.test(location.search)) {
+    setLang('sv', false);
+  } else {
+    setLang(saved || 'sv', false);
+  }
+
+  /* ---------------- booking form ---------------- */
+  var svcKey = null, slotKey = null, booked = null;
+  var regEl = document.getElementById('reg');
+  var phEl = document.getElementById('ph');
+  var btn = document.getElementById('bookbtn');
+  var REG_RE = /^[A-ZÅÄÖ]{3} ?\d{2}[A-ZÅÄÖ0-9]$/i;
+
+  function pick(sel, cls, cb) {
+    document.querySelectorAll(sel).forEach(function (b) {
+      b.addEventListener('click', function () {
+        document.querySelectorAll(sel).forEach(function (x) { x.classList.remove(cls); });
+        b.classList.add(cls);
+        cb(b.getAttribute('data-key'));
+        validate();
+      });
+    });
+  }
+  pick('#svc .chip', 'on', function (k) { svcKey = k; });
+  pick('#slots .slot', 'on', function (k) { slotKey = k; });
+  regEl.addEventListener('input', validate);
+  phEl.addEventListener('input', validate);
+
+  function validate() {
+    var phoneOk = phEl.value.replace(/\D/g, '').length >= 7;
+    btn.disabled = !(svcKey && slotKey && REG_RE.test(regEl.value.trim()) && phoneOk);
+  }
+
+  function renderConfirm() {
+    if (!booked) return;
+    var d = I18N[cur];
+    document.getElementById('csum').textContent =
+      booked.reg + ' · ' + d[booked.svc] + ' · ' + d[booked.slot];
+  }
+
+  btn.addEventListener('click', function () {
+    booked = { reg: regEl.value.trim().toUpperCase(), svc: svcKey, slot: slotKey };
+    document.getElementById('confirm').classList.add('show');
+    renderConfirm();
+  });
+
+  /* ---------------- car filter ---------------- */
+  document.querySelectorAll('#filter .chip').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('#filter .chip').forEach(function (x) { x.classList.remove('on'); });
+      b.classList.add('on');
+      var cat = b.getAttribute('data-cat');
+      document.querySelectorAll('#cargrid .car').forEach(function (c) {
+        c.classList.toggle('hide', cat !== 'all' && c.getAttribute('data-cat') !== cat);
+      });
+    });
+  });
 })();
-// reveal
-var io=new IntersectionObserver(function(es){es.forEach(function(e){
-  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},
-  {threshold:0,rootMargin:'0px 0px 12% 0px'});
-document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
 </script>
 </body>
 </html>
